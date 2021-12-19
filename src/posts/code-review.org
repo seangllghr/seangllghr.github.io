@@ -15,7 +15,11 @@
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>
 #+end_export
+#+latex: \begin{centering}
+#+html: <div style="text-align: center">
 [This is a transcript of the video code review.]\\
+#+html: </div>
+#+latex: \end{centering}
 Hello!
 My name is Sean Gallagher,
     and this is a video code review
@@ -47,7 +51,7 @@ The first category was Software Engineering and Design,
     and the scale of the ambitious enhancement I proposed.
 *** Existing Functionality
 The existing code implements an architectural pattern
-    common to Node.js/Express applications,
+    common to Node.js/@@latex:\allowbreak @@Express applications,
     which divides the application
     into layers for routing,
     controllers,
@@ -85,7 +89,6 @@ It's well documented,
 It does have a fair amount of legacy code,
     which makes the overall codebase a little confusing.
 Notably, whole files, like this ~basicApp.js~ file,
-  # Indicate file: [[file:~/Documents/2020/ew5/cs340/cs340-project/routes/basicApp.js][basicApp.js]]
     are entirely irrelevant to the final API.
 *** Enhancement
 The proposed enhancement for this category was
@@ -123,7 +126,6 @@ The only time the code really addresses this category
     are in the few places where it implements checks
     to ensure data integrity.
 In particular, the v1.0 API — implemented
-# Visit file: [[file:~/Documents/2020/ew5/cs340/cs340-project/services/stocks.js][services/stocks.js]]
     in part here in ~services/stocks.js~ — checks
     to ensure that new stock records
     do not duplicate existing ticker symbols.
@@ -144,7 +146,6 @@ Additionally,
     is not stored in the database.
 ** Databases
 *** Existing Functionality
-# Visit file: [[file:~/Documents/2020/ew5/cs340/cs340-project/db/index.js][db/index.js]]
 The existing database code essentially implements wrappers
     around MongoDB's Javascript driver
     to abstract some of the complexity
