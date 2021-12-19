@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-12-19 Sun 03:30 -->
+<!-- 2021-12-19 Sun 16:21 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Video Code Review</title>
@@ -9,6 +9,11 @@
 <meta name="author" content="Sean Gallagher">
 <link
     href="https://cdn.simplecss.org/simple.min.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<link
+    href="/styles/styles.css"
     rel="stylesheet"
     type="text/css"
 />
@@ -23,9 +28,9 @@
 </nav>
 </header>
 <main id="content">
-<div id="outline-container-org6287b7f" class="outline-2">
-<h2 id="org6287b7f">Before: The Existing STOCKS Application</h2>
-<div class="outline-text-2" id="text-org6287b7f">
+<div id="outline-container-org80e7fd6" class="outline-2">
+<h2 id="org80e7fd6">Before: The Existing STOCKS Application</h2>
+<div class="outline-text-2" id="text-org80e7fd6">
 <div style="padding:56.25% 0 0 0;position:relative;">
     <iframe
         src="https://player.vimeo.com/video/658176706?h=df0a786daa&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
@@ -37,8 +42,12 @@
     ></iframe>
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>
+<div style="text-align: center">
 <p>
 [This is a transcript of the video code review.]<br>
+</p>
+</div>
+<p>
 Hello!
 My name is Sean Gallagher,
     and this is a video code review
@@ -64,9 +73,9 @@ Along with establishing the foundation
     on the enhancements that were originally proposed.
 </p>
 </div>
-<div id="outline-container-org4a2b103" class="outline-3">
-<h3 id="org4a2b103">Software Engineering and Design</h3>
-<div class="outline-text-3" id="text-org4a2b103">
+<div id="outline-container-orga3cf1f9" class="outline-3">
+<h3 id="orga3cf1f9">Software Engineering and Design</h3>
+<div class="outline-text-3" id="text-orga3cf1f9">
 <p>
 The first category was Software Engineering and Design,
     and it was far and away the most grandiose,
@@ -75,9 +84,9 @@ The first category was Software Engineering and Design,
     and the scale of the ambitious enhancement I proposed.
 </p>
 </div>
-<div id="outline-container-org5fde833" class="outline-4">
-<h4 id="org5fde833">Existing Functionality</h4>
-<div class="outline-text-4" id="text-org5fde833">
+<div id="outline-container-org329e8c3" class="outline-4">
+<h4 id="org329e8c3">Existing Functionality</h4>
+<div class="outline-text-4" id="text-org329e8c3">
 <p>
 The existing code implements an architectural pattern
     common to Node.js/Express applications,
@@ -108,9 +117,9 @@ Therefore, the client experience became the focus
 </p>
 </div>
 </div>
-<div id="outline-container-orgbf93bee" class="outline-4">
-<h4 id="orgbf93bee">Code Analysis</h4>
-<div class="outline-text-4" id="text-orgbf93bee">
+<div id="outline-container-orgc59a91a" class="outline-4">
+<h4 id="orgc59a91a">Code Analysis</h4>
+<div class="outline-text-4" id="text-orgc59a91a">
 <p>
 The existing codebase is actually
     something I'm rather proud of.
@@ -124,16 +133,13 @@ It's well documented,
 It does have a fair amount of legacy code,
     which makes the overall codebase a little confusing.
 Notably, whole files, like this <code>basicApp.js</code> file,
-</p>
-
-<p>
-are entirely irrelevant to the final API.
+    are entirely irrelevant to the final API.
 </p>
 </div>
 </div>
-<div id="outline-container-org22a2e04" class="outline-4">
-<h4 id="org22a2e04">Enhancement</h4>
-<div class="outline-text-4" id="text-org22a2e04">
+<div id="outline-container-orga84d2e8" class="outline-4">
+<h4 id="orga84d2e8">Enhancement</h4>
+<div class="outline-text-4" id="text-orga84d2e8">
 <p>
 The proposed enhancement for this category was
     an Angular single-page web application,
@@ -156,17 +162,17 @@ The architecture,
 </div>
 </div>
 </div>
-<div id="outline-container-orgdd169ca" class="outline-3">
-<h3 id="orgdd169ca">Data Structures and Algorithms</h3>
-<div class="outline-text-3" id="text-orgdd169ca">
+<div id="outline-container-org202b221" class="outline-3">
+<h3 id="org202b221">Data Structures and Algorithms</h3>
+<div class="outline-text-3" id="text-org202b221">
 <p>
 Our second category pertained
     to Data Structures and Algorithms.
 </p>
 </div>
-<div id="outline-container-org7cec9e4" class="outline-4">
-<h4 id="org7cec9e4">Existing Functionality</h4>
-<div class="outline-text-4" id="text-org7cec9e4">
+<div id="outline-container-orgf0adb92" class="outline-4">
+<h4 id="orgf0adb92">Existing Functionality</h4>
+<div class="outline-text-4" id="text-orgf0adb92">
 <p>
 The existing application is relatively weak in this category.
 MongoDB handles much of the data processing
@@ -180,17 +186,14 @@ As a result,
 </p>
 </div>
 </div>
-<div id="outline-container-org50a2357" class="outline-4">
-<h4 id="org50a2357">Code Analysis</h4>
-<div class="outline-text-4" id="text-org50a2357">
+<div id="outline-container-orgad3f894" class="outline-4">
+<h4 id="orgad3f894">Code Analysis</h4>
+<div class="outline-text-4" id="text-orgad3f894">
 <p>
 The only time the code really addresses this category
     are in the few places where it implements checks
     to ensure data integrity.
 In particular, the v1.0 API — implemented
-</p>
-
-<p>
     in part here in ~services/stocks.js~ — checks
     to ensure that new stock records
     do not duplicate existing ticker symbols.
@@ -200,9 +203,9 @@ Everything else is open to interpretation,
 </p>
 </div>
 </div>
-<div id="outline-container-orgc1eb44f" class="outline-4">
-<h4 id="orgc1eb44f">Enhancement</h4>
-<div class="outline-text-4" id="text-orgc1eb44f">
+<div id="outline-container-orge77672f" class="outline-4">
+<h4 id="orge77672f">Enhancement</h4>
+<div class="outline-text-4" id="text-orge77672f">
 <p>
 The enhancement in the
     Data Structures and Algorithms category
@@ -219,13 +222,13 @@ Additionally,
 </div>
 </div>
 </div>
-<div id="outline-container-orga62f6df" class="outline-3">
-<h3 id="orga62f6df">Databases</h3>
-<div class="outline-text-3" id="text-orga62f6df">
+<div id="outline-container-orgba19066" class="outline-3">
+<h3 id="orgba19066">Databases</h3>
+<div class="outline-text-3" id="text-orgba19066">
 </div>
-<div id="outline-container-orgdd38025" class="outline-4">
-<h4 id="orgdd38025">Existing Functionality</h4>
-<div class="outline-text-4" id="text-orgdd38025">
+<div id="outline-container-org74e9a2f" class="outline-4">
+<h4 id="org74e9a2f">Existing Functionality</h4>
+<div class="outline-text-4" id="text-org74e9a2f">
 <p>
 The existing database code essentially implements wrappers
     around MongoDB's Javascript driver
@@ -236,9 +239,9 @@ The existing system drew data from a static JSON file,
 </p>
 </div>
 </div>
-<div id="outline-container-org8d22aec" class="outline-4">
-<h4 id="org8d22aec">Code Analysis</h4>
-<div class="outline-text-4" id="text-org8d22aec">
+<div id="outline-container-org0ffb119" class="outline-4">
+<h4 id="org0ffb119">Code Analysis</h4>
+<div class="outline-text-4" id="text-org0ffb119">
 <p>
 The database code is pretty good, overall.
 In all but one case,
@@ -260,9 +263,9 @@ As the functionality it provides is fairly close
 </p>
 </div>
 </div>
-<div id="outline-container-org6b5f48b" class="outline-4">
-<h4 id="org6b5f48b">Enhancement</h4>
-<div class="outline-text-4" id="text-org6b5f48b">
+<div id="outline-container-orgdd68769" class="outline-4">
+<h4 id="orgdd68769">Enhancement</h4>
+<div class="outline-text-4" id="text-orgdd68769">
 <p>
 The database enhancement was to be a REST client service
     that reached out to a third-party market data provider
@@ -279,9 +282,9 @@ Since the various third-party providers I researched
 </div>
 </div>
 </div>
-<div id="outline-container-orgf60a73f" class="outline-3">
-<h3 id="orgf60a73f">Conclusion</h3>
-<div class="outline-text-3" id="text-orgf60a73f">
+<div id="outline-container-orgfaf22f9" class="outline-3">
+<h3 id="orgfaf22f9">Conclusion</h3>
+<div class="outline-text-3" id="text-orgfaf22f9">
 <p>
 Ultimately,
     the original proposal boiled down

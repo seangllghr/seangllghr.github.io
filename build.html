@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-12-19 Sun 03:30 -->
+<!-- 2021-12-19 Sun 16:21 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About this Portfolio</title>
@@ -12,28 +12,11 @@
     rel="stylesheet"
     type="text/css"
 />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<link
+    href="/styles/styles.css"
+    rel="stylesheet"
+    type="text/css"
+/>
 </head>
 <body>
 <header id="header" class="status">
@@ -46,28 +29,39 @@
 </header>
 <main id="content">
 
-<article id="outline-container-org9751d8c" class="outline-2">
-<h2 id="org9751d8c">How the Sausage Gets Made</h2>
-<div class="outline-text-2" id="text-org9751d8c">
+<article id="outline-container-org68d39a5" class="outline-2">
+<h2 id="org68d39a5">How the Sausage Gets Made</h2>
+<div class="outline-text-2" id="text-org68d39a5">
 <p>
 This portfolio uses Emacs' <code>org-mode</code> as its content authoring system.
 In the future, I might spend more time talking about this,
     but this document currently exists solely as a literate build script
     for the publishing configuration.
+Before we start,
+    a note on terminology:
+    I use "org" on its own
+    to refer to the lightweight markup syntax used by <code>org-mode</code>,
+    as well as files written in the format ("org files").
+Additionally, I'll generally set the name of the Emacs mode in <code>fixed-pitch</code>,
+    like I would set the names of functions, modules, variables, and the like.
+In the original org sources,
+    I try to use <code>~tildes~</code> for such tokens,
+    and <code>=equals=</code>  for other verbatim text and the names of files,
+    though they render identically in HTML<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 </div>
-<section id="outline-container-orgbce1dda" class="outline-3">
-<h3 id="orgbce1dda">The scripts</h3>
-<div class="outline-text-3" id="text-orgbce1dda">
+<section id="outline-container-org27f2abc" class="outline-3">
+<h3 id="org27f2abc">The scripts</h3>
+<div class="outline-text-3" id="text-org27f2abc">
 <p>
 There are two scripts involved in the build process.
 The first, a shell script, handles launching the build script,
     while the second is the Emacs Lisp script that does the actual building.
 </p>
 </div>
-<section id="outline-container-org0c056cd" class="outline-4">
-<h4 id="org0c056cd"><code>build.sh</code></h4>
-<div class="outline-text-4" id="text-org0c056cd">
+<section id="outline-container-org5616519" class="outline-4">
+<h4 id="org5616519"><code>build.sh</code></h4>
+<div class="outline-text-4" id="text-org5616519">
 <p>
 Originally, the shell script simply launched the Lisp script,
     but it didn't take long to realize
@@ -95,14 +89,14 @@ The final script looks like this:
   <span style="font-weight: bold;">case</span> <span style="font-style: italic;">"$1"</span><span style="font-weight: bold;"> in</span>
     <span style="font-style: italic;">"start"</span>)
       alacritty -e <span style="font-style: italic;">\</span>
-        live-server public/ --watch=public/ --port=3000 --no-browser &amp;
+        live-server public/ --port=3000 --no-browser &amp;
       sleep 1
       chromium --app=<span style="font-style: italic;">"http://localhost:3000"</span> --class=noswallow <span style="font-style: italic;">\</span>
         --auto-open-devtools-for-tabs --force-dark-mode <span style="font-style: italic;">\</span>
         &gt;/dev/null 2&gt;&amp;1 &amp;
       inotifywait -rm ./ -e close_write |
         <span style="font-weight: bold;">while </span><span style="font-weight: bold;">read</span> directory action file; <span style="font-weight: bold;">do</span>
-          <span style="font-weight: bold;">if</span> [ <span style="font-style: italic;">"$file"</span> = <span style="font-style: italic;">"publish.el"</span> ] || [ -z <span style="font-style: italic;">"${file##*.org}"</span> ];
+          <span style="font-weight: bold;">if</span> [ <span style="font-style: italic;">"$file"</span> = <span style="font-style: italic;">"publish.el"</span> ] || [ -z <span style="font-style: italic;">"${directory##./src*}"</span> ];
           <span style="font-weight: bold;">then</span>
             <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"Detected change in ${directory}${file}"</span>
             publish
@@ -121,17 +115,17 @@ The final script looks like this:
 </div>
 </section>
 
-<section id="outline-container-org380f3a4" class="outline-4">
-<h4 id="org380f3a4"><code>publish.el</code></h4>
-<div class="outline-text-4" id="text-org380f3a4">
+<section id="outline-container-org5a18d1f" class="outline-4">
+<h4 id="org5a18d1f"><code>publish.el</code></h4>
+<div class="outline-text-4" id="text-org5a18d1f">
 <p>
 The publishing script is more involved,
     but almost all of it is configuring the publishing environment.
 </p>
 </div>
-<section id="outline-container-org5549acf" class="outline-5">
-<h5 id="org5549acf">Dependencies</h5>
-<div class="outline-text-5" id="text-org5549acf">
+<section id="outline-container-orge708a6e" class="outline-5">
+<h5 id="orge708a6e">Dependencies</h5>
+<div class="outline-text-5" id="text-orge708a6e">
 <p>
 First, we pull in Emacs' package management and initialize it:
 </p>
@@ -164,9 +158,9 @@ The last initialization step
 </div>
 </section>
 
-<section id="outline-container-orgc673c6e" class="outline-5">
-<h5 id="orgc673c6e">Configuration</h5>
-<div class="outline-text-5" id="text-orgc673c6e">
+<section id="outline-container-org98d834f" class="outline-5">
+<h5 id="org98d834f">Configuration</h5>
+<div class="outline-text-5" id="text-org98d834f">
 <p>
 We need to set a few variables explicitly,
     mostly for including stylesheets
@@ -187,8 +181,13 @@ We declare strings
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span>
- simplecss <span style="font-style: italic;">"&lt;link</span>
+ styles <span style="font-style: italic;">"&lt;link</span>
 <span style="font-style: italic;">    href=\"https://cdn.simplecss.org/simple.min.css\"</span>
+<span style="font-style: italic;">    rel=\"stylesheet\"</span>
+<span style="font-style: italic;">    type=\"text/css\"</span>
+<span style="font-style: italic;">/&gt;</span>
+<span style="font-style: italic;">&lt;link</span>
+<span style="font-style: italic;">    href=\"/styles/styles.css\"</span>
 <span style="font-style: italic;">    rel=\"stylesheet\"</span>
 <span style="font-style: italic;">    type=\"text/css\"</span>
 <span style="font-style: italic;">/&gt;"</span>
@@ -204,9 +203,71 @@ We declare strings
 We can then use these values to explicitly set the appropriate <code>org-mode</code> values:
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-html-head simplecss
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-html-head styles
       org-html-preamble header
-      org-html-postamble <span style="font-style: italic;">"&lt;p&gt;&amp;copy;&amp;thinsp;2021 %a&lt;br&gt;%e&lt;/p&gt;"</span>)
+      org-html-postamble <span style="font-style: italic;">"&lt;p&gt;&amp;copy;&amp;thinsp;2021 %a&lt;br&gt;%e&lt;/p&gt;"</span>
+      org-src-preserve-indentation t)
+</pre>
+</div>
+<p>
+If we're running on my home workstation
+    (and, therefore, generating  $\mathrm{\LaTeX}$  files),
+    we also need to change some relevant export settings.
+The first part of this monstrous nightmare defines a list of packages
+    that the exporter should include,
+    while the second defines the remainder of the document preamble:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">if</span> (string= (system-name) <span style="font-style: italic;">"Asgard"</span>)
+    (<span style="font-weight: bold;">setq</span> org-latex-default-packages-alist
+          '((<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"graphicx"</span>  t)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"grffile"</span>   t)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"longtable"</span> nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"wrapfig"</span>   nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"rotating"</span>  nil)
+            (<span style="font-style: italic;">"normalem"</span>     <span style="font-style: italic;">"ulem"</span>      t)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"amsmath"</span>   t)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"textcomp"</span>  t)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"amssymb"</span>   t)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"capt-of"</span>   nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"titling"</span>   t)
+            (<span style="font-style: italic;">"margin=1in"</span>   <span style="font-style: italic;">"geometry"</span>  nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"fontspec"</span>  nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"setspace"</span>  nil)
+            (<span style="font-style: italic;">"tiny,compact"</span> <span style="font-style: italic;">"titlesec"</span>  nil)
+            (<span style="font-style: italic;">"small"</span>        <span style="font-style: italic;">"caption"</span>   nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"enumitem"</span>  nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"unicode-math"</span> nil)
+            (<span style="font-style: italic;">"x11names"</span>     <span style="font-style: italic;">"xcolor"</span>    nil)
+            (<span style="font-style: italic;">""</span>             <span style="font-style: italic;">"minted"</span>    nil)
+            (<span style="font-style: italic;">"colorlinks=true,allcolors=darkgray"</span> <span style="font-style: italic;">"hyperref"</span> t))
+          org-latex-classes
+          '((<span style="font-style: italic;">"article"</span>
+             <span style="font-style: italic;">"\\documentclass[11pt]{article}</span>
+<span style="font-style: italic;">[DEFAULT-PACKAGES]</span>
+<span style="font-style: italic;">\\setmainfont{TeX Gyre Pagella}[Ligatures=TeX]</span>
+<span style="font-style: italic;">\\setsansfont{TeX Gyre Heros}[Ligatures=TeX]</span>
+<span style="font-style: italic;">\\setmonofont{JetBrains Mono}[Scale=0.8]</span>
+<span style="font-style: italic;">\\setmathfont{Asana Math}</span>
+<span style="font-style: italic;">\\makeatletter</span>
+<span style="font-style: italic;">\\def\\@maketitle{%</span>
+<span style="font-style: italic;">\\singlespacing</span>
+<span style="font-style: italic;">\\begin{center}%</span>
+<span style="font-style: italic;">{\\LARGE \\@title \\par}%</span>
+<span style="font-style: italic;">\\vskip 1.5em%</span>
+<span style="font-style: italic;">{\\large \\@author}%</span>
+<span style="font-style: italic;">\\end{center}%</span>
+<span style="font-style: italic;">\\par</span>
+<span style="font-style: italic;">\\vskip 1.5em}</span>
+<span style="font-style: italic;">\\doublespacing</span>
+<span style="font-style: italic;">\\makeatother</span>
+<span style="font-style: italic;">\\setminted{baselinestretch=1,linenos,numbersep=4pt,obeytabs=true}"</span>
+             (<span style="font-style: italic;">"\\section{%s}"</span> . <span style="font-style: italic;">"\\section*{%s}"</span>)
+             (<span style="font-style: italic;">"\\subsection{%s}"</span> . <span style="font-style: italic;">"\\subsection*{%s}"</span>)
+             (<span style="font-style: italic;">"\\subsubsection{%s}"</span> . <span style="font-style: italic;">"\\subsubsection*{%s}"</span>)
+             (<span style="font-style: italic;">"\\paragraph{%s}"</span> . <span style="font-style: italic;">"\\paragraph*{%s}"</span>)
+             (<span style="font-style: italic;">"\\subparagraph{%s}"</span> . <span style="font-style: italic;">"\\subparagraph*{%s}"</span>)))
+          ))
 </pre>
 </div>
 
@@ -245,17 +306,22 @@ Finally, we set our main configuration <code>alist</code>,
              <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"css</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">jpg</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">gif</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">png</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">svg"</span>
              <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./public"</span>
              <span style="font-weight: bold;">:publishing-function</span> 'org-publish-attachment)))
+(<span style="font-weight: bold;">setq</span> latex-publish-alist
+      (list
+       (list <span style="font-style: italic;">"seangllghr.github.io:archive"</span>
+             <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
+             <span style="font-weight: bold;">:recursive</span> t
+             <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
+             <span style="font-weight: bold;">:exclude</span> <span style="font-style: italic;">"</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">build</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">stocks</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">.org"</span>
+             <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./archive"</span>
+             <span style="font-weight: bold;">:publishing-function</span> 'org-latex-publish-to-latex
+             <span style="font-weight: bold;">:headline-levels</span> 5
+             <span style="font-weight: bold;">:latex-listings</span> 'minted
+             <span style="font-weight: bold;">:section-numbers</span> nil
+             <span style="font-weight: bold;">:with-toc</span> nil)))
 (<span style="font-weight: bold;">if</span> (string= (system-name) <span style="font-style: italic;">"Asgard"</span>)
     (<span style="font-weight: bold;">setq</span> org-publish-project-alist
-          (append org-publish-project-alist
-                  (list
-                   (list <span style="font-style: italic;">"seangllghr.github.io:archive"</span>
-                         <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
-                         <span style="font-weight: bold;">:recursive</span> t
-                         <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
-                         <span style="font-weight: bold;">:exclude</span> <span style="font-style: italic;">"</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">build</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">index</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">.org"</span>
-                         <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./archive"</span>
-                         <span style="font-weight: bold;">:publishing-function</span> 'org-latex-publish-to-latex)))))
+          (append org-publish-project-alist latex-publish-alist)))
 </pre>
 </div>
 
@@ -263,11 +329,12 @@ Finally, we set our main configuration <code>alist</code>,
 There are three publish processes in here:
     an org-to-HTML process that generates the content pages,
     a process to copy over any static assets,
-    and — if we're on my local machine — a
-    final job to generate \LaTeX files from the relevant <code>org</code> files,
+    and — if we're on my local machine — a final job
+    to generate  $\mathrm{\LaTeX}$  files
+    from the relevant org files,
     which I'll turn into PDFs using <code>latexmk</code> on my local machine.
 The last job gets appended only if
-    the hostname matches my primary workstation;<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+    the hostname matches my primary workstation;<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
     this saves GitHub's CI servers some time exporting the LaTeX files,
     which I'm sure they appreciate.
 </p>
@@ -289,7 +356,14 @@ Finally, we run the publishing command:
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">Isn't Lisp such an elegant language?
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">At some point,
+        when I have more time,
+        I'll probably write a custom exporter for HTML,
+        both to differentiate tilde and equals
+        (I'm thinking <code>&lt;samp&gt;</code> for the latter)
+        and to wrap footnotes in a proper &lt;aside&gt;.</div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara">Isn't Lisp such an elegant language?
     With all of those parentheses and bizarre indentation&#x2026; 🤌
     Joking aside,
     that took far too long to puzzle out.

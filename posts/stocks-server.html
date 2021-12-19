@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2021-12-19 Sun 16:21 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rewriting the STOCKS Server</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Sean Gallagher">
+<link
+    href="https://cdn.simplecss.org/simple.min.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<link
+    href="/styles/styles.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+</head>
+<body>
+<header id="header" class="status">
+<h1>Sean Gallagher</h1>
+<nav>
+  <a href="/">Home</a>
+  <a href="/stocks.html">The STOCKS Application</a>
+  <a href="/build.html">How it's Made</a>
+</nav>
+</header>
+<main id="content">
+
+<div id="outline-container-org7b510a5" class="outline-2">
+<h2 id="org7b510a5">Rewriting the STOCKS Server</h2>
+<div class="outline-text-2" id="text-org7b510a5">
+<p>
+The original STOCKS server — a
+    fairly pedestrian Node.js/Express/MongoDB application
+    presenting a simplistic REST API — was
+    the clear first step
+    in the process of enhancing the application for my portfolio.
+The new STOCKS server would have to tailor this generic API
+    to meet the needs of the nascent web client
+    in a sustainable and extensible fashion,
+    and it would do so with several clear goals in mind.
+Most importantly,
+    the new server and its concurrent data model
+    would need to ensure the stability and security of the overall system.
+The original application enforced only basic constraints on input data,
+    an approach that was suitable
+    for a first foray into RESTful web services,
+    but one that was certain to expose the system to all manner of calamity
+    as ongoing development piled on
+    the additional complexity of a real front-end application.
+Furthermore,
+    the server should aim to implement the best of modern application design,
+    to ease developer burden
+    and further improve performance, maintainability, and capability.
+</p>
+</div>
+<div id="outline-container-org3815e15" class="outline-3">
+<h3 id="org3815e15">Monorepos and Frameworks and Modules (Oh my&#x2026;)</h3>
+<div class="outline-text-3" id="text-org3815e15">
+<p>
+This last point was especially salient in this early stage of the project.
+Despite my vantage point at the very beginning of my career,
+    I understood how rare it was to have the chance
+    to approach a problem with both an entirely clean slate
+    and the benefit of lessons learned from a first attempt.
+After examining a number of solutions
+    for managing the complexity of a full-stack application,
+    I decided to implement the project as a monorepo,
+    and selected <a href="https://nrwl.io/">Nrwl Nx</a> to manage the workspace.
+The term <i>monorepo</i> refers to a single repository
+    which contains code for multiple loosely-coupled projects,
+    from a single full-stack solution like our STOCKS application
+    to the entire development output of a company.
+</p>
+
+<p>
+Nx was definitely overkill,
+    but it promised to handle integration
+    of multiple independent applications and libraries
+    across a single project workspace,
+    an approach I ultimately couldn't pass up.
+On top of making sure I was able to wire all of the pieces together,
+    Nx also came with batteries included;
+    it went about scaffolding applications and modules without complaint,
+    happily launched whichever development servers I needed,
+    and I swear I could hear it whistling cheerfully as it set up my Git repo.
+More importantly — for me, a die-hard command-line enthusiast — it
+    offered all of this functionality <i>without</i> a lumbering IDE.
+Nx's most significant contribution to the project was here,
+    in streamlining the developer experience.
+While I don't doubt that I could've reached a point
+    where I was as confident manipulating the relevant pieces as it was,
+    the tool's ability to fast-track the process of onboarding — even
+    into a codebase <i>I</i> was responsible for — was invaluable,
+    and a testament to its utility in the real world.
+</p>
+
+<p>
+With the choice of workspace management out of the way,
+    the next major hurdle to clear involved frameworks.
+Specifically,
+    I had to decide whether to reimplement STOCKS using pure Express
+    or delve further into the unknown
+    and pick a Typescript-native library.
+Ever the adventurer — or masochist — I chose to dive into the unknown,
+    and went about assembling a Nest.js application.
+Nest.js is a Typescript back-end web framework
+    that aims to be library-agnostic.
+It uses Express by default,
+    but is equally prepared to use other frameworks,
+    if something else strikes your fancy.
+Nest prides itself on being simple and declarative,
+    using decorators and dependency injection
+    to limit the amount of boilerplate code its developers have to write,
+    in the same vein as Angular.
+Since I was going to be using Angular later in the project,
+    I thought it might be prudent to give the paradigm a try
+    while I was still working with familiar concepts.
+</p>
+
+<p>
+I'm glad I did.
+Nest.js made the process of working on a REST API astonishingly simple.
+Two directories worth of routes and controllers
+    simplified into one <code>[module-name].controller.ts</code> file per module.
+The concept of modules itself
+    wasn't even especially difficult to wrap my head around,
+    as they mapped directly to the nested routes files
+    that I had written for the original STOCKS server
+    (at least, they did for this phase of the project).
+More impressively,
+    I could inject the <code>MongooseModule</code>
+    and abstract away the entire data access layer
+    with a single <code>async</code> method call.
+It was the picture of a modern, productive work environment,
+    and it led me directly to the solution to the other,
+    far more significant goal of this enhancement.
+</p>
+</div>
+</div>
+<div id="outline-container-org1080751" class="outline-3">
+<h3 id="org1080751">Defining the Data Model</h3>
+<div class="outline-text-3" id="text-org1080751">
+<p>
+Once I got into the meat of developing the new STOCKS application,
+    it quickly became clear
+    that Nest.js wasn't just going to make it easier to define a data model,
+    it was going to force me to do so.
+For Mongoose to do its work,
+    it needs a <code>Schema</code>,
+    which — by certainly-random happenstance — sounded
+    an awful lot like the data model I'd set out to design.
+As it turned out
+    (again, certainly through serendipitous good fortune,
+    and definitely not as a result of deliberate intent
+    precipitated by arduous research and careful consideration<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>),
+    Typescript and Nx provided a spectacular avenue
+    for defining that data model in a powerful, reusable manner.
+Using an Nx library — which
+    is ultimately just some smoke and mirrors
+    wrapped around the Typescript compiler's path handling capabilities — I
+    was able to define a set of interfaces for objects that contained stock data.
+These interfaces were deceptively simple,
+    as they contained only declarations of the names and data types
+    of the data a stock was expected to contain,
+    but they provided all of the leverage necessary
+    to enforce consistency across the entire application.
+While I would eventually implement a separate <code>Stock</code> class
+    (which, itself, implemented the <code>StockData</code> interface,
+    as it came to be called)
+    that offered some additional functionality,
+    the interface itself remained essentially similar throughout the project.
+In fact, the data model interface experienced only two major changes
+    during the duration of development,
+    only one of which broke previously-implemented functionality.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org501f5e0" class="outline-3">
+<h3 id="org501f5e0">Not Groundbreaking, but Ground Broken</h3>
+<div class="outline-text-3" id="text-org501f5e0">
+<p>
+The decisions I made during this first phase of development
+    had lasting ramifications for the project.
+I implemented a modular, extensible RESTful application server
+    using a host of modern programming techniques.
+This modularity was crucial;
+    I ended up extending the API several times
+    as my needs changed and clarified
+    during development of the <code>market-sync</code> module and the WebSTOCKS client,
+    and each extension took only a few minutes to implement.
+Each comparable extension in pure Express
+    would likely have taken twice as long
+    and required substantially more code to execute.
+</p>
+
+<p>
+These advantages were compounded
+    by the flexibility of the data model and its pairing with Mongoose.
+Because the Mongoose model saved only the data
+    which was explicitly included in the schema — which,
+    itself, implemented the <code>StockData</code> interface to the letter — I
+    was able to bypass hours of development time
+    that I might have otherwise spent writing code
+    to parse incoming data and transform it to conform with the model.
+In addition to the stability and security improvements
+    that this robust data processing model engenders,
+    development on subsequent phases was considerably accelerated.
+Furthermore,
+    the data model can continue to grow seamlessly
+    as more data becomes necessary;
+    simply adding fields to the interface and schema files
+    is enough to extend the application.
+This kind of extensibility is unequivocally valuable,
+    as it eases application maintenance
+    and facilitates agile response to changing user demands.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">In case it's not clear,
+    I'm being facetious.
+    I knew what I was doing.</div></div>
+
+
+</div>
+</div></main>
+<footer id="footer" class="status">
+<p>&copy;&thinsp;2021 Sean Gallagher<br><a href="mailto:seangllghr@gmail.com">seangllghr@gmail.com</a></p>
+</footer>
+</body>
+</html>
