@@ -123,7 +123,7 @@
              :base-directory "./src"
              :recursive t
              :base-extension "org"
-             :exclude "\\(build\\)\\|\\(stocks\\)\\|\\(index\\).org"
+             :exclude "\\(\\(build\\)\\|\\(stocks\\)\\|\\(index\\)\\).org"
              :publishing-directory "./archive"
              :publishing-function 'org-latex-publish-to-latex
              :headline-levels 5
