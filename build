@@ -2,7 +2,6 @@
 
 publish () {
   emacs -Q --script publish.el
-  ls -R **/*.{tex,html}~
 }
 
 if [ $# -gt 0 ]; then

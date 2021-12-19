@@ -35,7 +35,6 @@ While it can still run a single on-demand build
 
 publish () {
   emacs -Q --script publish.el
-  ls -R **/*.{tex,html}~
 }
 
 if [ $# -gt 0 ]; then
