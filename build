@@ -8,7 +8,7 @@ if [ $# -gt 0 ]; then
   case "$1" in
     "start")
       alacritty -e \
-        live-server public/ --watch=public/ --port=3000 --no-browser &
+        live-server public/ --port=3000 --no-browser &
       sleep 1
       chromium --app="http://localhost:3000" --class=noswallow \
         --auto-open-devtools-for-tabs --force-dark-mode \
