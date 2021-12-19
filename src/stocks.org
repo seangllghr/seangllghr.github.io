@@ -1,0 +1,19 @@
+#+TITLE: Building the STOCKS Application
+
+* Building the STOCKS Application
+The process of building the STOCKS application began in 2020,
+    with the development of the original server application.
+This application,
+    written in Javascript for the Node.js platform,
+    presented a fairly conventional REST API
+    for accessing a MongoDB backend.
+Its successor,
+    a full-stack application using modern Typescript
+    and popular front- and back-end frameworks,
+    is the product of nearly a month of concerted effort.
+The video code review and narratives below
+    discuss the state of the original project
+    and the development process that led to the STOCKS application.
+** Video Code Review
+The [[file:posts/code-review.org][Video Code Review]] focuses on the state of the original Javascript server,
+    as it existed at the end of August, 2020.

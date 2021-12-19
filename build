@@ -1,0 +1,32 @@
+#!/bin/bash
+
+publish () {
+  emacs -Q --script publish.el
+  ls -R **/*.{tex,html}~
+}
+
+if [ $# -gt 0 ]; then
+  case "$1" in
+    "start")
+      alacritty -e \
+        live-server public/ --watch=public/ --port=3000 --no-browser &
+      sleep 1
+      chromium --app="http://localhost:3000" --class=noswallow \
+        --auto-open-devtools-for-tabs --force-dark-mode \
+        >/dev/null 2>&1 &
+      inotifywait -rm ./ -e close_write |
+        while read directory action file; do
+          if [ "$file" = "publish.el" ] || [ -z "${file##*.org}" ];
+          then
+            echo "Detected change in ${directory}${file}"
+            publish
+          fi
+        done
+      ;;
+    "clean")
+      rm -rf public archive
+      ;;
+  esac
+else
+  publish
+fi

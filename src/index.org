@@ -1,0 +1,7 @@
+#+title: Sean Gallagher — Portfolio
+
+* Hi! I'm Sean
+Within the next 24 hours,
+    this page should contain my professional portfolio.
+Right now, though, it's definitely a work in progress.
+Feel free to poke around.

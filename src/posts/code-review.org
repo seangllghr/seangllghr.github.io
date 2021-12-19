@@ -1,0 +1,201 @@
+#+TITLE: Video Code Review
+# I'm a little aggressive with SemBr in this file because it's a script for an
+# actual video recording. The breaks make it easier for me to read—and breathe.
+* Before: The Existing STOCKS Application
+#+begin_export html
+<div style="padding:56.25% 0 0 0;position:relative;">
+    <iframe
+        src="https://player.vimeo.com/video/658176706?h=df0a786daa&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+        title="STOCKS Application Code Review"
+    ></iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+#+end_export
+[This is a transcript of the video code review.]\\
+Hello!
+My name is Sean Gallagher,
+    and this is a video code review
+    for my professional portfolio.
+This video will examine
+    the original Javascript codebase
+    that I developed for CS-340:
+    Client-Server Development,
+    and touch on its relationship
+    to the final full-stack application,
+    produced during my Computer Science capstone experience.
+The project consists of three categories:
+    Software Engineering and Design,
+    Data Structures and Algorithms,
+    and Databases,
+    and the original application is enhanced
+    in each of these categories.
+Along with establishing the foundation
+    on which the portfolio application was built
+    through a discussion of the original application's
+    functionality and code quality,
+    this video will also touch
+    on the enhancements that were originally proposed.
+** Software Engineering and Design
+The first category was Software Engineering and Design,
+    and it was far and away the most grandiose,
+    both in terms of the scope of the existing codebase
+    covered by the category
+    and the scale of the ambitious enhancement I proposed.
+*** Existing Functionality
+The existing code implements an architectural pattern
+    common to Node.js/Express applications,
+    which divides the application
+    into layers for routing,
+    controllers,
+    services,
+    and data access.
+It probably has a proper name,
+    but I don't remember it,
+    and I can't seem to find it.
+The Express server framework
+    provides routing and HTTP handling functionality
+    within the routes and controllers layers,
+    the services layer contains business logic,
+    and the database layer
+    wraps the MongoDB Javascript driver API
+    and abstracts its complexity.
+The existing code also includes a rudimentary Bash client.
+This client works more than well enough for testing — so
+    much so that I continued to use
+    its fundamental principles to test the expanded API
+    throughout the project — but
+    it is far from the polished experience
+    that most modern consumers expect.
+Therefore, the client experience became the focus
+    for the Software Design and Engineering milestone.
+*** Code Analysis
+The existing codebase is actually
+    something I'm rather proud of.
+It's well documented,
+    with rich docstring comments,
+    containing type information that would prove invaluable
+    in constructing the Data Structures enhancement,
+    and it coherently follows the pattern typically used
+    for Express application development
+    against a MongoDB back end.
+It does have a fair amount of legacy code,
+    which makes the overall codebase a little confusing.
+Notably, whole files, like this ~basicApp.js~ file,
+  # Indicate file: [[file:~/Documents/2020/ew5/cs340/cs340-project/routes/basicApp.js][basicApp.js]]
+    are entirely irrelevant to the final API.
+*** Enhancement
+The proposed enhancement for this category was
+    an Angular single-page web application,
+    which would replicate
+    the existing functionality of this Bash client
+    and add charting capabilities.
+Angular implements a variation
+    of common front-end architectural paradigms,
+    like MVC and MVVM.
+Early versions facetiously referred to AngularJS,
+    Angular's predecessor,
+    as an MVW architecture,
+    which stood for "Model-View-Whatever."
+The architecture,
+    as it exists today,
+    is component-based,
+    and similar to other front-end Javascript frameworks,
+    like React and Vue.
+** Data Structures and Algorithms
+Our second category pertained
+    to Data Structures and Algorithms.
+*** Existing Functionality
+The existing application is relatively weak in this category.
+MongoDB handles much of the data processing
+    within the database server, itself,
+    and it returns the data — through the Javascript driver — as
+    native Javascript objects.
+As a result,
+    the existing application is essentially data-agnostic,
+    and it enforces only basic conditions
+    on the data structures it receives from the driver.
+*** Code Analysis
+The only time the code really addresses this category
+    are in the few places where it implements checks
+    to ensure data integrity.
+In particular, the v1.0 API — implemented
+# Visit file: [[file:~/Documents/2020/ew5/cs340/cs340-project/services/stocks.js][services/stocks.js]]
+    in part here in ~services/stocks.js~ — checks
+    to ensure that new stock records
+    do not duplicate existing ticker symbols.
+Everything else is open to interpretation,
+    which constitutes a substantial risk
+    to system stability and, probably, security.
+*** Enhancement
+The enhancement in the
+    Data Structures and Algorithms category
+    aims to address this shortcoming
+    by reimplementing the server application in Typescript,
+    which provides static typing
+    that will enforce a consistent data model.
+Additionally,
+    the new application will implement schema validation
+    as an extra layer of protection
+    to ensure that inconsistent data
+    is not stored in the database.
+** Databases
+*** Existing Functionality
+# Visit file: [[file:~/Documents/2020/ew5/cs340/cs340-project/db/index.js][db/index.js]]
+The existing database code essentially implements wrappers
+    around MongoDB's Javascript driver
+    to abstract some of the complexity
+    of establishing and managing database connections.
+The existing system drew data from a static JSON file,
+    and only changed based on user manipulations.
+*** Code Analysis
+The database code is pretty good, overall.
+In all but one case,
+    this ~dataAggregate~ function here,
+    I use destructuring assignment
+    to handle optional configuration,
+    which is an excellent use of modern Javascript features.
+If I could do it again,
+    I'd almost certainly prefer that from the beginning
+    over the much more cumbersome
+    ternary assignment statements that I used in this case.
+Unlike the other layers
+    (and the controller layer, in particular),
+    the database code is much more streamlined.
+As the functionality it provides is fairly close
+    to that offered by the MongoDB driver itself,
+    it had less of a chance to accumulate legacy cruft
+    over the course of its relatively brief development.
+*** Enhancement
+The database enhancement was to be a REST client service
+    that reached out to a third-party market data provider
+    to fetch real-world stock market data.
+Since the various third-party providers I researched
+    make fundamentally related data available
+    through multiple API endpoints,
+    this service would have to fetch data
+    from several sources for each stock
+    and synthesize that data into a single stock record
+    consistent with the data model
+    defined in the Data Structures enhancement.
+** Conclusion
+Ultimately,
+    the original proposal boiled down
+    to a near-complete rewrite of the STOCKS application.
+While Typescript's status as a superset of Javascript
+    implied that the project could, in theory,
+    benefit from a non-trivial amount of code reuse,
+    the concurrent shift
+    to the Typescript-native NestJS server framework
+    meant that the application was essentially rewritten
+    from the ground up.
+Fortunately,
+    NestJS made this process relatively painless,
+    and the fundamental concepts
+    remained essentially the same.
+The result, in my clearly-unbiased opinion,
+    was certainly worth the effort.
+Thank you.

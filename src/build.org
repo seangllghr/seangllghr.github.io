@@ -1,0 +1,191 @@
+#+TITLE: About this Portfolio
+
+* How the Sausage Gets Made
+:properties:
+:html_container: article
+:end:
+This portfolio uses Emacs' ~org-mode~ as its content authoring system.
+In the future, I might spend more time talking about this,
+    but this document currently exists solely as a literate build script
+    for the publishing configuration.
+** The scripts
+:properties:
+:html_container: section
+:end:
+There are two scripts involved in the build process.
+The first, a shell script, handles launching the build script,
+    while the second is the Emacs Lisp script that does the actual building.
+*** ~build.sh~
+:properties:
+:html_container: section
+:end:
+Originally, the shell script simply launched the Lisp script,
+    but it didn't take long to realize
+    that I was grossly underutilizing the script's automation potential.
+While it can still run a single on-demand build
+    when run with no arguments,
+    passing the =start= argument
+    launches a full auto-rebuilding development environment,
+    including a Chromium ui-less window,
+    Chromium dev tools,
+    a browser auto-reloader (I'm using [[https://github.com/tapio/live-server][live-server]]),
+    and an ~inotifywait~-powered auto-publisher.
+#+begin_src shell :tangle ../build
+#!/bin/bash
+
+publish () {
+  emacs -Q --script publish.el
+  ls -R **/*.{tex,html}~
+}
+
+if [ $# -gt 0 ]; then
+  case "$1" in
+    "start")
+      alacritty -e \
+        live-server public/ --watch=public/ --port=3000 --no-browser &
+      sleep 1
+      chromium --app="http://localhost:3000" --class=noswallow \
+        --auto-open-devtools-for-tabs --force-dark-mode \
+        >/dev/null 2>&1 &
+      inotifywait -rm ./ -e close_write |
+        while read directory action file; do
+          if [ "$file" = "publish.el" ] || [ -z "${file##*.org}" ];
+          then
+            echo "Detected change in ${directory}${file}"
+            publish
+          fi
+        done
+      ;;
+    "clean")
+      rm -rf public archive
+      ;;
+  esac
+else
+  publish
+fi
+#+end_src
+
+#+RESULTS:
+
+*** ~publish.el~
+:properties:
+:html_container: section
+:end:
+The publishing script is more involved,
+    but almost all of it is configuring the publishing environment.
+**** Dependencies
+:properties:
+:html_container: section
+:end:
+First, we pull in Emacs' package management and initialize it:
+#+begin_src emacs-lisp :tangle ../publish.el
+(require 'package)
+(setq package-user-dir (expand-file-name "./.packages"))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+#+end_src
+Once we have the package system up and running,
+    we pull in the dependencies:
+#+begin_src emacs-lisp :tangle ../publish.el
+(package-install 'htmlize)
+#+end_src
+
+We then require ~ox-publish~ so we can actually publish
+#+begin_src emacs-lisp :tangle ../publish.el
+(require 'ox-publish)
+#+end_src
+
+We also set author name and email address,
+    since we aren't loading my personal config
+#+begin_src emacs-lisp :tangle ../publish.el
+(setq user-full-name "Sean Gallagher"
+      user-mail-address "seangllghr@gmail.com")
+#+end_src
+**** Configuration
+:properties:
+:html_container: section
+:end:
+We need to set a few variables explicitly,
+    mostly for including stylesheets
+    and our custom pre/postamble.
+We declare strings
+    to hold our custom HTML header
+    (the footer is short, so we set that inline),
+    as well as a link to the [[https://simplecss.org/][Simple.css]] CDN:
+#+begin_src emacs-lisp :tangle ../publish.el
+(setq
+ simplecss "<link
+    href=\"https://cdn.simplecss.org/simple.min.css\"
+    rel=\"stylesheet\"
+    type=\"text/css\"
+/>"
+ header "<h1>Sean Gallagher</h1>
+<nav>
+  <a href=\"/\">Home</a>
+  <a href=\"/stocks.html\">The STOCKS Application</a>
+  <a href=\"/build.html\">How it's Made</a>
+</nav>")
+#+end_src
+We can then use these values to explicitly set the appropriate ~org-mode~ values:
+#+begin_src emacs-lisp :tangle ../publish.el
+(setq org-html-head simplecss
+      org-html-preamble header
+      org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>")
+#+end_src
+
+Finally, we set our main configuration ~alist~,
+    which declares our publish targets:
+#+begin_src emacs-lisp :tangle ../publish.el
+(setq org-publish-project-alist
+      (list
+       (list "seangllghr.github.io:content"
+             :language "en"
+             :base-directory "./src"
+             :recursive t
+             :base-extension "org"
+             :publishing-directory "./public"
+             :publishing-function 'org-html-publish-to-html
+             :headline-levels 5
+             :html-divs '((preamble "header" "header")
+                          (content "main" "content")
+                          (postamble "footer" "footer"))
+             :html-doctype "html5"
+             :html-head-include-default-style nil
+             :html-head-include-scripts nil
+             :html-html5-fancy t
+             :html-indent nil
+             :html-validation-link nil
+             :section-numbers nil
+             :with-date nil
+             :with-author t
+             :with-title nil
+             :with-toc nil)
+       (list "seangllghr.github.io:static"
+             :base-directory "./src"
+             :recursive t
+             :base-extension "css\\|jpg\\|gif\\|png\\|svg"
+             :publishing-directory "./public"
+             :publishing-function 'org-publish-attachment)
+       (list "seangllghr.github.io:archive"
+             :base-directory "./src"
+             :recursive t
+             :base-extension "org"
+             :exclude "\\(build\\)\\|\\(index\\).org"
+             :publishing-directory "./archive"
+             :publishing-function 'org-latex-publish-to-latex)))
+#+end_src
+
+Currently, the only configuration is for the HTML export.
+I've configured it to publish files from ~./src~ to the project root,
+    which is arguably ugly,
+    but compatible with GitHub Pages.
+I hope.
+
+Finally, we run the publishing command:
+#+begin_src emacs-lisp :tangle ../publish.el
+(org-publish-all t)
+(message "Build complete")
+#+end_src
