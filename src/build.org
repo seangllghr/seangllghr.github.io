@@ -8,6 +8,23 @@ This portfolio uses Emacs' ~org-mode~ as its content authoring system.
 In the future, I might spend more time talking about this,
     but this document currently exists solely as a literate build script
     for the publishing configuration.
+Before we start,
+    a note on terminology:
+    I use "org" on its own
+    to refer to the lightweight markup syntax used by ~org-mode~,
+    as well as files written in the format ("org files").
+Additionally, I'll generally set the name of the Emacs mode in ~fixed-pitch~,
+    like I would set the names of functions, modules, variables, and the like.
+In the original org sources,
+    I try to use =~tildes~= for such tokens,
+    and ==equals==  for other verbatim text and the names of files,
+    though they render identically in HTML[fn::
+    At some point,
+        when I have more time,
+        I'll probably write a custom exporter for HTML,
+        both to differentiate tilde and equals
+        (I'm thinking ~<samp>~ for the latter)
+        and to wrap footnotes in a proper ~<aside>.].
 ** The scripts
 :properties:
 :html_container: section
@@ -15,7 +32,7 @@ In the future, I might spend more time talking about this,
 There are two scripts involved in the build process.
 The first, a shell script, handles launching the build script,
     while the second is the Emacs Lisp script that does the actual building.
-*** ~build.sh~
+*** =build.sh=
 :properties:
 :html_container: section
 :end:
@@ -67,7 +84,7 @@ else
 fi
 #+end_src
 
-*** ~publish.el~
+*** =publish.el=
 :properties:
 :html_container: section
 :end:
@@ -138,7 +155,66 @@ We can then use these values to explicitly set the appropriate ~org-mode~ values
 #+begin_src emacs-lisp :tangle ../publish.el
 (setq org-html-head styles
       org-html-preamble header
-      org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>")
+      org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>"
+      org-src-preserve-indentation t)
+#+end_src
+If we're running on my home workstation
+    (and, therefore, generating @@html: $\mathrm{\LaTeX}$@@ @@latex: \LaTeX\ @@ files),
+    we also need to change some relevant export settings.
+The first part of this monstrous nightmare defines a list of packages
+    that the exporter should include,
+    while the second defines the remainder of the document preamble:
+#+begin_src emacs-lisp :tangle ../publish.el
+(if (string= (system-name) "Asgard")
+    (setq org-latex-default-packages-alist
+          '((""             "graphicx"  t)
+            (""             "grffile"   t)
+            (""             "longtable" nil)
+            (""             "wrapfig"   nil)
+            (""             "rotating"  nil)
+            ("normalem"     "ulem"      t)
+            (""             "amsmath"   t)
+            (""             "textcomp"  t)
+            (""             "amssymb"   t)
+            (""             "capt-of"   nil)
+            (""             "titling"   t)
+            ("margin=1in"   "geometry"  nil)
+            (""             "fontspec"  nil)
+            (""             "setspace"  nil)
+            ("tiny,compact" "titlesec"  nil)
+            ("small"        "caption"   nil)
+            (""             "enumitem"  nil)
+            (""             "unicode-math" nil)
+            ("x11names"     "xcolor"    nil)
+            (""             "minted"    nil)
+            ("colorlinks=true,allcolors=darkgray" "hyperref" t))
+          org-latex-classes
+          '(("article"
+             "\\documentclass[11pt]{article}
+[DEFAULT-PACKAGES]
+\\setmainfont{TeX Gyre Pagella}[Ligatures=TeX]
+\\setsansfont{TeX Gyre Heros}[Ligatures=TeX]
+\\setmonofont{JetBrains Mono}[Scale=0.8]
+\\setmathfont{Asana Math}
+\\makeatletter
+\\def\\@maketitle{%
+\\singlespacing
+\\begin{center}%
+{\\LARGE \\@title \\par}%
+\\vskip 1.5em%
+{\\large \\@author}%
+\\end{center}%
+\\par
+\\vskip 1.5em}
+\\doublespacing
+\\makeatother
+\\setminted{baselinestretch=1,linenos,numbersep=4pt,obeytabs=true}"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+          ))
 #+end_src
 
 Finally, we set our main configuration ~alist~,
@@ -180,9 +256,13 @@ Finally, we set our main configuration ~alist~,
              :base-directory "./src"
              :recursive t
              :base-extension "org"
-             :exclude "\\(build\\)\\|\\(index\\).org"
+             :exclude "\\(build\\)\\|\\(stocks\\)\\|\\(index\\).org"
              :publishing-directory "./archive"
-             :publishing-function 'org-latex-publish-to-latex)))
+             :publishing-function 'org-latex-publish-to-latex
+             :headline-levels 5
+             :latex-listings 'minted
+             :section-numbers nil
+             :with-toc nil)))
 (if (string= (system-name) "Asgard")
     (setq org-publish-project-alist
           (append org-publish-project-alist latex-publish-alist)))
@@ -191,8 +271,9 @@ Finally, we set our main configuration ~alist~,
 There are three publish processes in here:
     an org-to-HTML process that generates the content pages,
     a process to copy over any static assets,
-    and — if we're on my local machine — a
-    final job to generate \LaTeX files from the relevant ~org~ files,
+    and — if we're on my local machine — a final job
+    to generate @@html: $\mathrm{\LaTeX}$@@ @@latex: \LaTeX\ @@ files
+    from the relevant org files,
     which I'll turn into PDFs using ~latexmk~ on my local machine.
 The last job gets appended only if
     the hostname matches my primary workstation;[fn::

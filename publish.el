@@ -33,7 +33,59 @@
 
 (setq org-html-head styles
       org-html-preamble header
-      org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>")
+      org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>"
+      org-src-preserve-indentation t)
+
+(if (string= (system-name) "Asgard")
+    (setq org-latex-default-packages-alist
+          '((""             "graphicx"  t)
+            (""             "grffile"   t)
+            (""             "longtable" nil)
+            (""             "wrapfig"   nil)
+            (""             "rotating"  nil)
+            ("normalem"     "ulem"      t)
+            (""             "amsmath"   t)
+            (""             "textcomp"  t)
+            (""             "amssymb"   t)
+            (""             "capt-of"   nil)
+            (""             "titling"   t)
+            ("margin=1in"   "geometry"  nil)
+            (""             "fontspec"  nil)
+            (""             "setspace"  nil)
+            ("tiny,compact" "titlesec"  nil)
+            ("small"        "caption"   nil)
+            (""             "enumitem"  nil)
+            (""             "unicode-math" nil)
+            ("x11names"     "xcolor"    nil)
+            (""             "minted"    nil)
+            ("colorlinks=true,allcolors=darkgray" "hyperref" t))
+          org-latex-classes
+          '(("article"
+             "\\documentclass[11pt]{article}
+[DEFAULT-PACKAGES]
+\\setmainfont{TeX Gyre Pagella}[Ligatures=TeX]
+\\setsansfont{TeX Gyre Heros}[Ligatures=TeX]
+\\setmonofont{JetBrains Mono}[Scale=0.8]
+\\setmathfont{Asana Math}
+\\makeatletter
+\\def\\@maketitle{%
+\\singlespacing
+\\begin{center}%
+{\\LARGE \\@title \\par}%
+\\vskip 1.5em%
+{\\large \\@author}%
+\\end{center}%
+\\par
+\\vskip 1.5em}
+\\doublespacing
+\\makeatother
+\\setminted{baselinestretch=1,linenos,numbersep=4pt,obeytabs=true}"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+          ))
 
 (setq org-publish-project-alist
       (list
@@ -71,9 +123,13 @@
              :base-directory "./src"
              :recursive t
              :base-extension "org"
-             :exclude "\\(build\\)\\|\\(index\\).org"
+             :exclude "\\(build\\)\\|\\(stocks\\)\\|\\(index\\).org"
              :publishing-directory "./archive"
-             :publishing-function 'org-latex-publish-to-latex)))
+             :publishing-function 'org-latex-publish-to-latex
+             :headline-levels 5
+             :latex-listings 'minted
+             :section-numbers nil
+             :with-toc nil)))
 (if (string= (system-name) "Asgard")
     (setq org-publish-project-alist
           (append org-publish-project-alist latex-publish-alist)))
