@@ -15,7 +15,7 @@ if [ $# -gt 0 ]; then
         >/dev/null 2>&1 &
       inotifywait -rm ./ -e close_write |
         while read directory action file; do
-          if [ "$file" = "publish.el" ] || [ -z "${file##*.org}" ];
+          if [ "$file" = "publish.el" ] || [ -z "${directory##./src*}" ];
           then
             echo "Detected change in ${directory}${file}"
             publish

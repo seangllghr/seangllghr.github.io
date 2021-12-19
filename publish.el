@@ -14,8 +14,13 @@
       user-mail-address "seangllghr@gmail.com")
 
 (setq
- simplecss "<link
+ styles "<link
     href=\"https://cdn.simplecss.org/simple.min.css\"
+    rel=\"stylesheet\"
+    type=\"text/css\"
+/>
+<link
+    href=\"/styles/styles.css\"
     rel=\"stylesheet\"
     type=\"text/css\"
 />"
@@ -26,7 +31,7 @@
   <a href=\"/build.html\">How it's Made</a>
 </nav>")
 
-(setq org-html-head simplecss
+(setq org-html-head styles
       org-html-preamble header
       org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>")
 
