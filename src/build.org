@@ -24,7 +24,7 @@ In the original org sources,
         I'll probably write a custom exporter for HTML,
         both to differentiate tilde and equals
         (I'm thinking ~<samp>~ for the latter)
-        and to wrap footnotes in a proper ~<aside>.].
+        and to wrap footnotes in a proper <aside>.].
 ** The scripts
 :properties:
 :html_container: section
@@ -256,7 +256,7 @@ Finally, we set our main configuration ~alist~,
              :base-directory "./src"
              :recursive t
              :base-extension "org"
-             :exclude "\\(\\(build\\)\\|\\(stocks\\)\\|\\(index\\)\\).org"
+             :exclude "\\(\\(build\\)\\|\\(stocks\\)\\).org"
              :publishing-directory "./archive"
              :publishing-function 'org-latex-publish-to-latex
              :headline-levels 5
