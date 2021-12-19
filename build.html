@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2021-12-19 Sun 02:47 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About this Portfolio</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Sean Gallagher">
+<link
+    href="https://cdn.simplecss.org/simple.min.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+</head>
+<body>
+<header id="header" class="status">
+<h1>Sean Gallagher</h1>
+<nav>
+  <a href="/">Home</a>
+  <a href="/stocks.html">The STOCKS Application</a>
+  <a href="/build.html">How it's Made</a>
+</nav>
+</header>
+<main id="content">
+
+<article id="outline-container-org2717cd5" class="outline-2">
+<h2 id="org2717cd5">How the Sausage Gets Made</h2>
+<div class="outline-text-2" id="text-org2717cd5">
+<p>
+This portfolio uses Emacs' <code>org-mode</code> as its content authoring system.
+In the future, I might spend more time talking about this,
+    but this document currently exists solely as a literate build script
+    for the publishing configuration.
+</p>
+</div>
+<section id="outline-container-org6c9ff08" class="outline-3">
+<h3 id="org6c9ff08">The scripts</h3>
+<div class="outline-text-3" id="text-org6c9ff08">
+<p>
+There are two scripts involved in the build process.
+The first, a shell script, handles launching the build script,
+    while the second is the Emacs Lisp script that does the actual building.
+</p>
+</div>
+<section id="outline-container-org381346e" class="outline-4">
+<h4 id="org381346e"><code>build.sh</code></h4>
+<div class="outline-text-4" id="text-org381346e">
+<p>
+Originally, the shell script simply launched the Lisp script,
+    but it didn't take long to realize
+    that I was grossly underutilizing the script's automation potential.
+While it can still run a single on-demand build
+    when run with no arguments,
+    passing the <code>start</code> argument
+    launches a full auto-rebuilding development environment,
+    including a Chromium ui-less window,
+    Chromium dev tools,
+    a browser auto-reloader (I'm using <a href="https://github.com/tapio/live-server">live-server</a>),
+    and an <code>inotifywait</code>-powered auto-publisher.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">bash</span>
+
+<span style="font-weight: bold;">publish</span> () {
+  emacs -Q --script publish.el
+}
+
+<span style="font-weight: bold;">if</span> [ $<span style="font-weight: bold; font-style: italic;">#</span> -gt 0 ]; <span style="font-weight: bold;">then</span>
+  <span style="font-weight: bold;">case</span> <span style="font-style: italic;">"$1"</span><span style="font-weight: bold;"> in</span>
+    <span style="font-style: italic;">"start"</span>)
+      alacritty -e <span style="font-style: italic;">\</span>
+        live-server public/ --watch=public/ --port=3000 --no-browser &amp;
+      sleep 1
+      chromium --app=<span style="font-style: italic;">"http://localhost:3000"</span> --class=noswallow <span style="font-style: italic;">\</span>
+        --auto-open-devtools-for-tabs --force-dark-mode <span style="font-style: italic;">\</span>
+        &gt;/dev/null 2&gt;&amp;1 &amp;
+      inotifywait -rm ./ -e close_write |
+        <span style="font-weight: bold;">while </span><span style="font-weight: bold;">read</span> directory action file; <span style="font-weight: bold;">do</span>
+          <span style="font-weight: bold;">if</span> [ <span style="font-style: italic;">"$file"</span> = <span style="font-style: italic;">"publish.el"</span> ] || [ -z <span style="font-style: italic;">"${file##*.org}"</span> ];
+          <span style="font-weight: bold;">then</span>
+            <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"Detected change in ${directory}${file}"</span>
+            publish
+          <span style="font-weight: bold;">fi</span>
+        <span style="font-weight: bold;">done</span>
+      ;;
+    <span style="font-style: italic;">"clean"</span>)
+      rm -rf public archive
+      ;;
+  <span style="font-weight: bold;">esac</span>
+<span style="font-weight: bold;">else</span>
+  publish
+<span style="font-weight: bold;">fi</span>
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgfa3ccb6" class="outline-4">
+<h4 id="orgfa3ccb6"><code>publish.el</code></h4>
+<div class="outline-text-4" id="text-orgfa3ccb6">
+<p>
+The publishing script is more involved,
+    but almost all of it is configuring the publishing environment.
+</p>
+</div>
+<section id="outline-container-org676d365" class="outline-5">
+<h5 id="org676d365">Dependencies</h5>
+<div class="outline-text-5" id="text-org676d365">
+<p>
+First, we pull in Emacs' package management and initialize it:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">package</span>)
+(<span style="font-weight: bold;">setq</span> package-user-dir (expand-file-name <span style="font-style: italic;">"./.packages"</span>))
+(<span style="font-weight: bold;">setq</span> package-archives '((<span style="font-style: italic;">"melpa"</span> . <span style="font-style: italic;">"https://melpa.org/packages/"</span>)
+                         (<span style="font-style: italic;">"elpa"</span> . <span style="font-style: italic;">"https://elpa.gnu.org/packages/"</span>)))
+(package-initialize)
+(<span style="font-weight: bold;">unless</span> package-archive-contents
+  (package-refresh-contents))
+</pre>
+</div>
+<p>
+Once we have the package system up and running,
+    we pull in the dependencies:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(package-install 'htmlize)
+</pre>
+</div>
+
+<p>
+We then require <code>ox-publish</code> so we can actually publish
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-publish</span>)
+</pre>
+</div>
+
+<p>
+We also set author name and email address,
+    since we aren't loading my personal config
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> user-full-name <span style="font-style: italic;">"Sean Gallagher"</span>
+      user-mail-address <span style="font-style: italic;">"seangllghr@gmail.com"</span>)
+</pre>
+</div>
+</div>
+</section>
+<section id="outline-container-orgea0e792" class="outline-5">
+<h5 id="orgea0e792">Configuration</h5>
+<div class="outline-text-5" id="text-orgea0e792">
+<p>
+We need to set a few variables explicitly,
+    mostly for including stylesheets
+    and our custom pre/postamble.
+We declare strings
+    to hold our custom HTML header
+    (the footer is short, so we set that inline),
+    as well as a link to the <a href="https://simplecss.org/">Simple.css</a> CDN:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span>
+ simplecss <span style="font-style: italic;">"&lt;link</span>
+<span style="font-style: italic;">    href=\"https://cdn.simplecss.org/simple.min.css\"</span>
+<span style="font-style: italic;">    rel=\"stylesheet\"</span>
+<span style="font-style: italic;">    type=\"text/css\"</span>
+<span style="font-style: italic;">/&gt;"</span>
+ header <span style="font-style: italic;">"&lt;h1&gt;Sean Gallagher&lt;/h1&gt;</span>
+<span style="font-style: italic;">&lt;nav&gt;</span>
+<span style="font-style: italic;">  &lt;a href=\"/\"&gt;Home&lt;/a&gt;</span>
+<span style="font-style: italic;">  &lt;a href=\"/stocks.html\"&gt;The STOCKS Application&lt;/a&gt;</span>
+<span style="font-style: italic;">  &lt;a href=\"/build.html\"&gt;How it's Made&lt;/a&gt;</span>
+<span style="font-style: italic;">&lt;/nav&gt;"</span>)
+</pre>
+</div>
+<p>
+We can then use these values to explicitly set the appropriate <code>org-mode</code> values:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-html-head simplecss
+      org-html-preamble header
+      org-html-postamble <span style="font-style: italic;">"&lt;p&gt;&amp;copy;&amp;thinsp;2021 %a&lt;br&gt;%e&lt;/p&gt;"</span>)
+</pre>
+</div>
+
+<p>
+Finally, we set our main configuration <code>alist</code>,
+    which declares our publish targets:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-publish-project-alist
+      (list
+       (list <span style="font-style: italic;">"seangllghr.github.io:content"</span>
+             <span style="font-weight: bold;">:language</span> <span style="font-style: italic;">"en"</span>
+             <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
+             <span style="font-weight: bold;">:recursive</span> t
+             <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
+             <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./public"</span>
+             <span style="font-weight: bold;">:publishing-function</span> 'org-html-publish-to-html
+             <span style="font-weight: bold;">:headline-levels</span> 5
+             <span style="font-weight: bold;">:html-divs</span> '((preamble <span style="font-style: italic;">"header"</span> <span style="font-style: italic;">"header"</span>)
+                          (content <span style="font-style: italic;">"main"</span> <span style="font-style: italic;">"content"</span>)
+                          (postamble <span style="font-style: italic;">"footer"</span> <span style="font-style: italic;">"footer"</span>))
+             <span style="font-weight: bold;">:html-doctype</span> <span style="font-style: italic;">"html5"</span>
+             <span style="font-weight: bold;">:html-head-include-default-style</span> nil
+             <span style="font-weight: bold;">:html-head-include-scripts</span> nil
+             <span style="font-weight: bold;">:html-html5-fancy</span> t
+             <span style="font-weight: bold;">:html-indent</span> nil
+             <span style="font-weight: bold;">:html-validation-link</span> nil
+             <span style="font-weight: bold;">:section-numbers</span> nil
+             <span style="font-weight: bold;">:with-date</span> nil
+             <span style="font-weight: bold;">:with-author</span> t
+             <span style="font-weight: bold;">:with-title</span> nil
+             <span style="font-weight: bold;">:with-toc</span> nil)
+       (list <span style="font-style: italic;">"seangllghr.github.io:static"</span>
+             <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
+             <span style="font-weight: bold;">:recursive</span> t
+             <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"css</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">jpg</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">gif</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">png</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">svg"</span>
+             <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./public"</span>
+             <span style="font-weight: bold;">:publishing-function</span> 'org-publish-attachment)
+       (list <span style="font-style: italic;">"seangllghr.github.io:archive"</span>
+             <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
+             <span style="font-weight: bold;">:recursive</span> t
+             <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
+             <span style="font-weight: bold;">:exclude</span> <span style="font-style: italic;">"</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">build</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">index</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">.org"</span>
+             <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./archive"</span>
+             <span style="font-weight: bold;">:publishing-function</span> 'org-latex-publish-to-latex)))
+</pre>
+</div>
+
+<p>
+Currently, the only configuration is for the HTML export.
+I've configured it to publish files from <code>./src</code> to the project root,
+    which is arguably ugly,
+    but compatible with GitHub Pages.
+I hope.
+</p>
+
+<p>
+Finally, we run the publishing command:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(org-publish-all t)
+(message <span style="font-style: italic;">"Build complete"</span>)
+</pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+</article>
+</main>
+<footer id="footer" class="status">
+<p>&copy;&thinsp;2021 Sean Gallagher<br><a href="mailto:seangllghr@gmail.com">seangllghr@gmail.com</a></p>
+</footer>
+</body>
+</html>
