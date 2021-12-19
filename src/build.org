@@ -23,13 +23,16 @@ Originally, the shell script simply launched the Lisp script,
     but it didn't take long to realize
     that I was grossly underutilizing the script's automation potential.
 While it can still run a single on-demand build
-    when run with no arguments,
+    when run with no arguments
+    (and does in the GitHub Pages CI job),
     passing the =start= argument
-    launches a full auto-rebuilding development environment,
-    including a Chromium ui-less window,
+    launches a full auto-rebuilding local development environment
+    that I've tailored for my AwesomeWM setup,
+    including a Chromium app window,
     Chromium dev tools,
     a browser auto-reloader (I'm using [[https://github.com/tapio/live-server][live-server]]),
-    and an ~inotifywait~-powered auto-publisher.
+    and an ~inotifywait~-powered runner for the publishing script.
+The final script looks like this:
 #+begin_src shell :tangle ../build
 #!/bin/bash
 
@@ -87,22 +90,16 @@ First, we pull in Emacs' package management and initialize it:
   (package-refresh-contents))
 #+end_src
 Once we have the package system up and running,
-    we pull in the dependencies:
+    we make sure Emacs has installed the dependencies:
 #+begin_src emacs-lisp :tangle ../publish.el
 (package-install 'htmlize)
 #+end_src
-
-We then require ~ox-publish~ so we can actually publish
+The last initialization step
+    is to require ~ox-publish~ so we can actually publish:
 #+begin_src emacs-lisp :tangle ../publish.el
 (require 'ox-publish)
 #+end_src
 
-We also set author name and email address,
-    since we aren't loading my personal config
-#+begin_src emacs-lisp :tangle ../publish.el
-(setq user-full-name "Sean Gallagher"
-      user-mail-address "seangllghr@gmail.com")
-#+end_src
 **** Configuration
 :properties:
 :html_container: section
@@ -110,6 +107,12 @@ We also set author name and email address,
 We need to set a few variables explicitly,
     mostly for including stylesheets
     and our custom pre/postamble.
+Since we aren't loading my personal config,
+    we start by setting my name and email address:
+#+begin_src emacs-lisp :tangle ../publish.el
+(setq user-full-name "Sean Gallagher"
+      user-mail-address "seangllghr@gmail.com")
+#+end_src
 We declare strings
     to hold our custom HTML header
     (the footer is short, so we set that inline),
@@ -167,21 +170,37 @@ Finally, we set our main configuration ~alist~,
              :recursive t
              :base-extension "css\\|jpg\\|gif\\|png\\|svg"
              :publishing-directory "./public"
-             :publishing-function 'org-publish-attachment)
-       (list "seangllghr.github.io:archive"
-             :base-directory "./src"
-             :recursive t
-             :base-extension "org"
-             :exclude "\\(build\\)\\|\\(index\\).org"
-             :publishing-directory "./archive"
-             :publishing-function 'org-latex-publish-to-latex)))
+             :publishing-function 'org-publish-attachment)))
+(if (string= (system-name) "Asgard")
+    (setq org-publish-project-alist
+          (append org-publish-project-alist
+                  (list
+                   (list "seangllghr.github.io:archive"
+                         :base-directory "./src"
+                         :recursive t
+                         :base-extension "org"
+                         :exclude "\\(build\\)\\|\\(index\\).org"
+                         :publishing-directory "./archive"
+                         :publishing-function 'org-latex-publish-to-latex)))))
 #+end_src
 
-Currently, the only configuration is for the HTML export.
-I've configured it to publish files from ~./src~ to the project root,
-    which is arguably ugly,
-    but compatible with GitHub Pages.
-I hope.
+There are three publish processes in here:
+    an org-to-HTML process that generates the content pages,
+    a process to copy over any static assets,
+    and — if we're on my local machine — a
+    final job to generate \LaTeX files from the relevant ~org~ files,
+    which I'll turn into PDFs using ~latexmk~ on my local machine.
+The last job gets appended only if
+    the hostname matches my primary workstation;[fn::
+    Isn't Lisp such an elegant language?
+    With all of those parentheses and bizarre indentation... 🤌
+    Joking aside,
+    that took far too long to puzzle out.
+    Who thinks about code that way?
+    I love how powerful Emacs and org-mode are,
+    but I don't love actually programming it.]
+    this saves GitHub's CI servers some time exporting the LaTeX files,
+    which I'm sure they appreciate.
 
 Finally, we run the publishing command:
 #+begin_src emacs-lisp :tangle ../publish.el

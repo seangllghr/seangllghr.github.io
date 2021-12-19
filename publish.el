@@ -59,14 +59,18 @@
              :recursive t
              :base-extension "css\\|jpg\\|gif\\|png\\|svg"
              :publishing-directory "./public"
-             :publishing-function 'org-publish-attachment)
-       (list "seangllghr.github.io:archive"
-             :base-directory "./src"
-             :recursive t
-             :base-extension "org"
-             :exclude "\\(build\\)\\|\\(index\\).org"
-             :publishing-directory "./archive"
-             :publishing-function 'org-latex-publish-to-latex)))
+             :publishing-function 'org-publish-attachment)))
+(if (string= (system-name) "Asgard")
+    (setq org-publish-project-alist
+          (append org-publish-project-alist
+                  (list
+                   (list "seangllghr.github.io:archive"
+                         :base-directory "./src"
+                         :recursive t
+                         :base-extension "org"
+                         :exclude "\\(build\\)\\|\\(index\\).org"
+                         :publishing-directory "./archive"
+                         :publishing-function 'org-latex-publish-to-latex)))))
 
 (org-publish-all t)
 (message "Build complete")
