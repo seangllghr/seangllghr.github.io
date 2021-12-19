@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-12-19 Sun 02:47 -->
+<!-- 2021-12-19 Sun 03:30 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About this Portfolio</title>
@@ -12,6 +12,28 @@
     rel="stylesheet"
     type="text/css"
 />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <header id="header" class="status">
@@ -24,9 +46,9 @@
 </header>
 <main id="content">
 
-<article id="outline-container-org2717cd5" class="outline-2">
-<h2 id="org2717cd5">How the Sausage Gets Made</h2>
-<div class="outline-text-2" id="text-org2717cd5">
+<article id="outline-container-org9751d8c" class="outline-2">
+<h2 id="org9751d8c">How the Sausage Gets Made</h2>
+<div class="outline-text-2" id="text-org9751d8c">
 <p>
 This portfolio uses Emacs' <code>org-mode</code> as its content authoring system.
 In the future, I might spend more time talking about this,
@@ -34,30 +56,33 @@ In the future, I might spend more time talking about this,
     for the publishing configuration.
 </p>
 </div>
-<section id="outline-container-org6c9ff08" class="outline-3">
-<h3 id="org6c9ff08">The scripts</h3>
-<div class="outline-text-3" id="text-org6c9ff08">
+<section id="outline-container-orgbce1dda" class="outline-3">
+<h3 id="orgbce1dda">The scripts</h3>
+<div class="outline-text-3" id="text-orgbce1dda">
 <p>
 There are two scripts involved in the build process.
 The first, a shell script, handles launching the build script,
     while the second is the Emacs Lisp script that does the actual building.
 </p>
 </div>
-<section id="outline-container-org381346e" class="outline-4">
-<h4 id="org381346e"><code>build.sh</code></h4>
-<div class="outline-text-4" id="text-org381346e">
+<section id="outline-container-org0c056cd" class="outline-4">
+<h4 id="org0c056cd"><code>build.sh</code></h4>
+<div class="outline-text-4" id="text-org0c056cd">
 <p>
 Originally, the shell script simply launched the Lisp script,
     but it didn't take long to realize
     that I was grossly underutilizing the script's automation potential.
 While it can still run a single on-demand build
-    when run with no arguments,
+    when run with no arguments
+    (and does in the GitHub Pages CI job),
     passing the <code>start</code> argument
-    launches a full auto-rebuilding development environment,
-    including a Chromium ui-less window,
+    launches a full auto-rebuilding local development environment
+    that I've tailored for my AwesomeWM setup,
+    including a Chromium app window,
     Chromium dev tools,
     a browser auto-reloader (I'm using <a href="https://github.com/tapio/live-server">live-server</a>),
-    and an <code>inotifywait</code>-powered auto-publisher.
+    and an <code>inotifywait</code>-powered runner for the publishing script.
+The final script looks like this:
 </p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">bash</span>
@@ -96,17 +121,17 @@ While it can still run a single on-demand build
 </div>
 </section>
 
-<section id="outline-container-orgfa3ccb6" class="outline-4">
-<h4 id="orgfa3ccb6"><code>publish.el</code></h4>
-<div class="outline-text-4" id="text-orgfa3ccb6">
+<section id="outline-container-org380f3a4" class="outline-4">
+<h4 id="org380f3a4"><code>publish.el</code></h4>
+<div class="outline-text-4" id="text-org380f3a4">
 <p>
 The publishing script is more involved,
     but almost all of it is configuring the publishing environment.
 </p>
 </div>
-<section id="outline-container-org676d365" class="outline-5">
-<h5 id="org676d365">Dependencies</h5>
-<div class="outline-text-5" id="text-org676d365">
+<section id="outline-container-org5549acf" class="outline-5">
+<h5 id="org5549acf">Dependencies</h5>
+<div class="outline-text-5" id="text-org5549acf">
 <p>
 First, we pull in Emacs' package management and initialize it:
 </p>
@@ -122,39 +147,39 @@ First, we pull in Emacs' package management and initialize it:
 </div>
 <p>
 Once we have the package system up and running,
-    we pull in the dependencies:
+    we make sure Emacs has installed the dependencies:
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(package-install 'htmlize)
 </pre>
 </div>
-
 <p>
-We then require <code>ox-publish</code> so we can actually publish
+The last initialization step
+    is to require <code>ox-publish</code> so we can actually publish:
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-publish</span>)
 </pre>
 </div>
+</div>
+</section>
 
+<section id="outline-container-orgc673c6e" class="outline-5">
+<h5 id="orgc673c6e">Configuration</h5>
+<div class="outline-text-5" id="text-orgc673c6e">
 <p>
-We also set author name and email address,
-    since we aren't loading my personal config
+We need to set a few variables explicitly,
+    mostly for including stylesheets
+    and our custom pre/postamble.
+Since we aren't loading my personal config,
+    we start by setting my name and email address:
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> user-full-name <span style="font-style: italic;">"Sean Gallagher"</span>
       user-mail-address <span style="font-style: italic;">"seangllghr@gmail.com"</span>)
 </pre>
 </div>
-</div>
-</section>
-<section id="outline-container-orgea0e792" class="outline-5">
-<h5 id="orgea0e792">Configuration</h5>
-<div class="outline-text-5" id="text-orgea0e792">
 <p>
-We need to set a few variables explicitly,
-    mostly for including stylesheets
-    and our custom pre/postamble.
 We declare strings
     to hold our custom HTML header
     (the footer is short, so we set that inline),
@@ -219,23 +244,32 @@ Finally, we set our main configuration <code>alist</code>,
              <span style="font-weight: bold;">:recursive</span> t
              <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"css</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">jpg</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">gif</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">png</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">svg"</span>
              <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./public"</span>
-             <span style="font-weight: bold;">:publishing-function</span> 'org-publish-attachment)
-       (list <span style="font-style: italic;">"seangllghr.github.io:archive"</span>
-             <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
-             <span style="font-weight: bold;">:recursive</span> t
-             <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
-             <span style="font-weight: bold;">:exclude</span> <span style="font-style: italic;">"</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">build</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">index</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">.org"</span>
-             <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./archive"</span>
-             <span style="font-weight: bold;">:publishing-function</span> 'org-latex-publish-to-latex)))
+             <span style="font-weight: bold;">:publishing-function</span> 'org-publish-attachment)))
+(<span style="font-weight: bold;">if</span> (string= (system-name) <span style="font-style: italic;">"Asgard"</span>)
+    (<span style="font-weight: bold;">setq</span> org-publish-project-alist
+          (append org-publish-project-alist
+                  (list
+                   (list <span style="font-style: italic;">"seangllghr.github.io:archive"</span>
+                         <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
+                         <span style="font-weight: bold;">:recursive</span> t
+                         <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
+                         <span style="font-weight: bold;">:exclude</span> <span style="font-style: italic;">"</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">build</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">index</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">.org"</span>
+                         <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./archive"</span>
+                         <span style="font-weight: bold;">:publishing-function</span> 'org-latex-publish-to-latex)))))
 </pre>
 </div>
 
 <p>
-Currently, the only configuration is for the HTML export.
-I've configured it to publish files from <code>./src</code> to the project root,
-    which is arguably ugly,
-    but compatible with GitHub Pages.
-I hope.
+There are three publish processes in here:
+    an org-to-HTML process that generates the content pages,
+    a process to copy over any static assets,
+    and — if we're on my local machine — a
+    final job to generate \LaTeX files from the relevant <code>org</code> files,
+    which I'll turn into PDFs using <code>latexmk</code> on my local machine.
+The last job gets appended only if
+    the hostname matches my primary workstation;<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+    this saves GitHub's CI servers some time exporting the LaTeX files,
+    which I'm sure they appreciate.
 </p>
 
 <p>
@@ -251,7 +285,21 @@ Finally, we run the publishing command:
 </section>
 </section>
 </article>
-</main>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">Isn't Lisp such an elegant language?
+    With all of those parentheses and bizarre indentation&#x2026; 🤌
+    Joking aside,
+    that took far too long to puzzle out.
+    Who thinks about code that way?
+    I love how powerful Emacs and org-mode are,
+    but I don't love actually programming it.</div></div>
+
+
+</div>
+</div></main>
 <footer id="footer" class="status">
 <p>&copy;&thinsp;2021 Sean Gallagher<br><a href="mailto:seangllghr@gmail.com">seangllghr@gmail.com</a></p>
 </footer>
