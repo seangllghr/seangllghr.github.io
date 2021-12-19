@@ -14,6 +14,11 @@ Its successor,
 The video code review and narratives below
     discuss the state of the original project
     and the development process that led to the STOCKS application.
-** Video Code Review
-The [[file:posts/code-review.org][Video Code Review]] focuses on the state of the original Javascript server,
+** [[file:posts/code-review.org][Video Code Review]]
+The Video Code Review focuses on the state of the original Javascript server,
     as it existed at the end of August, 2020.
+** [[file:posts/stocks-server.org][Rewriting the STOCKS Server]]
+The first step in building the new STOCKS application
+    was to tackle reimplementing the server in Typescript.
+This meant wholesale embrace of new techniques and tools
+    and a more nuanced approach to data.
