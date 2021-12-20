@@ -1,9 +1,21 @@
 #+title: Sean Gallagher — Portfolio
 
 * Hi! I'm Sean
-Within the next 24 hours,
-    this page should contain my professional portfolio.
-Right now, though, it's definitely a work in progress.
-Feel free to poke around.
-** Test
-This is a test to see if pushing everything at once was a bad idea.
+I'm a full-stack developer
+    with experience across a wide array of technologies
+    and an unhealthy interest in obscure publishing technologies.
+This portfolio presents a snapshot of what I can do.
+While there are a number of projects I'm still polishing for inclusion,
+    I think the content here provides a broad-stroke overview of my best work,
+    and I'd love it if you'd take a look around.
+** The STOCKS Application
+#+name: img:webstocks
+#+attr_latex: :width \textwidth
+[[./media/webstocks.png]]
+The STOCKS Application is a full-stack web application
+    with a minimal, retro look-and-feel
+    built according to the latest industry standards.
+You can find the whole project codebase,
+    written in Typescript, HTML, and Sass,
+    [[https://github.com/seangllghr/portfolio-stocksapp][here on GitHub]],
+    and you can read more my development process [[file:stocks.org][here]].
