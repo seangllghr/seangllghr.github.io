@@ -1,9 +1,13 @@
 #+title: Sean Gallagher — Portfolio
 
 * Hi! I'm Sean
+#+begin_export latex
+The online version of this portfolio is available at
+\href{https://seangllghr.github.io}{https://seangllghr.github.io}
+#+end_export
 I'm a full-stack developer
     with experience across a wide array of technologies
-    and an unhealthy interest in obscure publishing technologies.
+    and an unhealthy interest [[file:build.org][in obscure publishing technologies]].
 This portfolio presents a snapshot of what I can do.
 While there are a number of projects I'm still polishing for inclusion,
     I think the content here provides a broad-stroke overview of my best work,
@@ -18,4 +22,4 @@ The STOCKS Application is a full-stack web application
 You can find the whole project codebase,
     written in Typescript, HTML, and Sass,
     [[https://github.com/seangllghr/portfolio-stocksapp][here on GitHub]],
-    and you can read more my development process [[file:stocks.org][here]].
+    and you can read more about my development process [[file:stocks.org][here]].
