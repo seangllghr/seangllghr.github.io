@@ -28,3 +28,11 @@ With the core API and data model complete,
 Real-world markets shift and change by the minute,
     but developing a workable application within the limits of a student budget
     required compromises and creativity.
+** [[file:posts/webstocks.org][The Façade]]
+For better or worse,
+    every architect recognizes the disproportionate amount of time and energy
+    that gets devoted to a building's principal façade,
+    and WebSTOCKS is no exception.
+That effort isn't just for aesthetics, though,
+    since a coherent and conscientious front-end design elevates a project
+    visually, structurally, and functionally.
