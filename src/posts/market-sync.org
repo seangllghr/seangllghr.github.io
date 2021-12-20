@@ -1,0 +1,153 @@
+#+TITLE: Reaching Out to the Market
+
+* Reaching Out to the Market
+With the initial reimplementation of the core server application completed,
+    development on meaningful expansions
+    to the application's capabilities could begin.
+Since the application database was still nearly empty,
+    starting work on front-end development didn't seem to make much sense,
+    so focus shifted to expanding the server application
+    with what would become the ~market-sync~ module.
+In writing the original proposal for the module — which
+was to implement a REST client service
+    that would synchronize the STOCKS application's internal database
+    with the relevant subset of real-world market data
+    obtained from a third-party API — I
+    thinking that it would likely constitute the smallest enhancement
+    by raw contribution to the codebase,
+    but its effect on the overall utility of the application
+    would dwarf that of other modules.
+In retrospect,
+    the capabilities introduced in ~market-sync~
+    quickly came to define the application as a whole
+    as development progressed through the final two phases of the project.
+** Interfacing with Reality
+Stock market data changes at a blistering pace,
+    with some APIs offering real-time trade data
+    that updates several times per second.
+Of course, such a volume of data doesn't come cheap,
+    and real-time API access was well outside
+    what I could reasonably justify paying.
+After some research,
+    I selected [[https://alphavantage.co/][AlphaVantage]] as the third-party provider
+    and registered for their free tier of service.
+This restricted me to a limit of 5 API calls per minute
+    and a daily limit of 500 total calls.
+Equally problematic was the fact that I'd configured the application
+    to take advantage of MongoDB Atlas at its free tier.
+Atlas is a cloud database service
+    offered by the company that develops the MongoDB software,
+    which handles database setup
+    and configuration of features like sharding and authentication.
+They offer a free tier of service for experimentation and study,
+    but it comes with a restrictive 512MB limit on database size.
+
+Between these two constraints,
+    it quickly became clear that updating any substantial database of stocks
+    would be an exercise in careful coordination.
+To limit both database size and update frequency,
+    I chose to pull daily time series data from AlphaVantage's API,
+    which seemed like a good compromise
+    between ensuring that data was fairly current
+    and respecting the limitations of the free services I depended on.
+Examining the API documentation
+    revealed another potential snag in the update process:
+    in order to conform to the data model
+    developed in the first phase of development
+    and provide actionable market data
+    for the analysts who might eventually use the application,
+    the ~market-sync~ service would need to aggregate data
+    from two separate API calls.
+** Database Problems, Data Structures Solutions
+Despite the fact that the ~market-sync~ service
+    began its life as a database-focused enhancement,
+    managing the constraints imposed by the third-party provider
+    called for an approach rooted in concepts of Data Structures and Algorithms.
+The first step was to atomize update operations;
+    I defined an update object interface that could enforce a known structure
+    on objects containing information about upcoming updates,
+    as well as an update type ~enum~
+    to reliably indicate which update function to execute
+    within a narrow, predefined set@@latex: (shown in Listing \ref{lst:update-object})@@.
+#+name: lst:update-object
+#+attr_latex: :placement [b]
+#+caption: \label{lst:update-object}The ~UpdateObject~ and its related ~UpdateType~ ~enum~.
+#+begin_src typescript
+enum UpdateType {
+  OVERVIEW = 1,
+  TIME_SERIES,
+  DEFER,
+}
+
+interface UpdateObject {
+  updateType: UpdateType;
+  symbol: string;
+}
+#+end_src
+
+With these structures established,
+    I implemented a simple queue to track pending update operations
+    using direct calls to Javascript array methods.
+Since this was the only instance of queuing in the application,
+    I didn't go through the extra effort
+    of implementing a fully-formed ~Queue~ type
+    or pulling in another dependency
+    for one written by another developer.
+Regardless,
+    the result was an effective queue for ~UpdateObjects~.
+All that remained was to schedule a recurring task
+    that would run each successive update
+    with an appropriate gap between each.
+There were a number of potential solutions to this scheduling problem,
+    but, once again, Nest.js provided a solution
+    that quickly became the clear front-runner.
+Nest's scheduling module,
+    which relies on a pure Javascript implementation of UNIX/Linux's ~cron~,
+    provided a familiar interface to task scheduling,
+    particularly for a Linux enthusiast like myself.
+Soon,
+    the application was running an update every 12 seconds,
+    making short work of the update queue — and,
+    once I started repopulating the update queue when it emptied,
+    rapidly consuming my 500-call-per-day limit.
+Another ~cron~ job quickly sorted this problem out,
+    scheduling an update for a reasonable post-market time each night.
+
+The final challenge with maintaining a low-limit system
+    was fundamentally a development concern,
+    rather than one that would crop up in production,
+    but it proved to be one of the more intractable issues to nail down.
+Each time the server started,
+    the system would queue a time series update
+    for each stock in the database.
+During development, this could happen dozens of times in an hour,
+    let alone over the course of a work day.
+Since there is no advantage to refreshing daily data more than once per day,
+    the simple solution was to update only at the specified time.
+However, this was also sub-optimal,
+    since there was no guarantee that the development system
+    would be online at 01:00 UTC,
+    the specified update time.
+Ultimately, the ideal solution was to examine the timestamp of each stock
+    and update only if the stock had not updated since the last market close.
+** A Strong, Flexible Skeleton
+With the completion of the market sync service,
+    development of the STOCKS application stood poised to progress
+    into the third and final phase of development,
+    and it would do so buoyed by the strengths of a robust back end.
+The core API, data model, and ~market-sync~ services
+    would all have a chance to prove their flexibility and extensibility,
+    as each grew and changed during this final phase
+    to accommodate the excesses of the front-end developer[fn::
+    I was my own worst enemy,
+    in terms of scope creep and ambition,
+    throughout this project,
+    but nowhere was this more apparent
+    than during the WebSTOCKS development process.].
+The ~market-sync~ module fared better in the face of this expansion
+    precisely because of it's modular design
+    and well-considered data structures.
+These decisions were informed by careful comparison
+    of the various relevant options,
+    and made use of modern, progressive technologies
+    which lent themselves to the evolving environment of a full-stack application.

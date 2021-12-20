@@ -22,3 +22,9 @@ The first step in building the new STOCKS application
     was to tackle reimplementing the server in Typescript.
 This meant wholesale embrace of new techniques and tools
     and a more nuanced approach to data.
+** [[file:posts/market-sync.org][Reaching Out to the Market]]
+With the core API and data model complete,
+    focus shifted outside the application for the first time.
+Real-world markets shift and change by the minute,
+    but developing a workable application within the limits of a student budget
+    required compromises and creativity.
