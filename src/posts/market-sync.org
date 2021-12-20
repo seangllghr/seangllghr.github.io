@@ -71,7 +71,7 @@ The first step was to atomize update operations;
     within a narrow, predefined set@@latex: (shown in Listing \ref{lst:update-object})@@.
 #+name: lst:update-object
 #+attr_latex: :placement [b]
-#+caption: \label{lst:update-object}The ~UpdateObject~ and its related ~UpdateType~ ~enum~.
+#+caption: @@latex: \label{lst:update-object}@@The ~UpdateObject~ and its related ~UpdateType~ ~enum~.
 #+begin_src typescript
 enum UpdateType {
   OVERVIEW = 1,
