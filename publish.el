@@ -123,13 +123,19 @@
              :base-directory "./src"
              :recursive t
              :base-extension "org"
-             :exclude "\\(\\(build\\)\\|\\(stocks\\)\\).org"
+             :exclude "\\(\\(build\\)\\|\\(^stocks\\)\\).org"
              :publishing-directory "./archive"
              :publishing-function 'org-latex-publish-to-latex
              :headline-levels 5
              :latex-listings 'minted
              :section-numbers nil
-             :with-toc nil)))
+             :with-toc nil)
+       (list "seangllghr.github.io:archive-static"
+             :base-directory "./src"
+             :recursive t
+             :base-extension "jpg\\|gif\\|png\\|svg"
+             :publishing-directory "./archive"
+             :publishing-function 'org-publish-attachment)))
 (if (string= (system-name) "Asgard")
     (setq org-publish-project-alist
           (append org-publish-project-alist latex-publish-alist)))
