@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-12-20 Mon 01:26 -->
+<!-- 2021-12-20 Mon 04:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About this Portfolio</title>
@@ -29,9 +29,9 @@
 </header>
 <main id="content">
 
-<article id="outline-container-orga4ffe58" class="outline-2">
-<h2 id="orga4ffe58">How the Sausage Gets Made</h2>
-<div class="outline-text-2" id="text-orga4ffe58">
+<article id="outline-container-orga7a5e2d" class="outline-2">
+<h2 id="orga7a5e2d">How the Sausage Gets Made</h2>
+<div class="outline-text-2" id="text-orga7a5e2d">
 <p>
 This portfolio uses Emacs' <code>org-mode</code> as its content authoring system.
 In the future, I might spend more time talking about this,
@@ -50,18 +50,18 @@ In the original org sources,
     though they render identically in HTML<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 </div>
-<section id="outline-container-org4792826" class="outline-3">
-<h3 id="org4792826">The scripts</h3>
-<div class="outline-text-3" id="text-org4792826">
+<section id="outline-container-org2a4714c" class="outline-3">
+<h3 id="org2a4714c">The scripts</h3>
+<div class="outline-text-3" id="text-org2a4714c">
 <p>
 There are two scripts involved in the build process.
 The first, a shell script, handles launching the build script,
     while the second is the Emacs Lisp script that does the actual building.
 </p>
 </div>
-<section id="outline-container-org3bf2088" class="outline-4">
-<h4 id="org3bf2088"><code>build.sh</code></h4>
-<div class="outline-text-4" id="text-org3bf2088">
+<section id="outline-container-org1717553" class="outline-4">
+<h4 id="org1717553"><code>build.sh</code></h4>
+<div class="outline-text-4" id="text-org1717553">
 <p>
 Originally, the shell script simply launched the Lisp script,
     but it didn't take long to realize
@@ -115,17 +115,17 @@ The final script looks like this:
 </div>
 </section>
 
-<section id="outline-container-org250a191" class="outline-4">
-<h4 id="org250a191"><code>publish.el</code></h4>
-<div class="outline-text-4" id="text-org250a191">
+<section id="outline-container-org48d4c0f" class="outline-4">
+<h4 id="org48d4c0f"><code>publish.el</code></h4>
+<div class="outline-text-4" id="text-org48d4c0f">
 <p>
 The publishing script is more involved,
     but almost all of it is configuring the publishing environment.
 </p>
 </div>
-<section id="outline-container-org5a7b875" class="outline-5">
-<h5 id="org5a7b875">Dependencies</h5>
-<div class="outline-text-5" id="text-org5a7b875">
+<section id="outline-container-org639c183" class="outline-5">
+<h5 id="org639c183">Dependencies</h5>
+<div class="outline-text-5" id="text-org639c183">
 <p>
 First, we pull in Emacs' package management and initialize it:
 </p>
@@ -158,9 +158,9 @@ The last initialization step
 </div>
 </section>
 
-<section id="outline-container-org49f9506" class="outline-5">
-<h5 id="org49f9506">Configuration</h5>
-<div class="outline-text-5" id="text-org49f9506">
+<section id="outline-container-orgc2b9bb5" class="outline-5">
+<h5 id="orgc2b9bb5">Configuration</h5>
+<div class="outline-text-5" id="text-orgc2b9bb5">
 <p>
 We need to set a few variables explicitly,
     mostly for including stylesheets
@@ -312,13 +312,19 @@ Finally, we set our main configuration <code>alist</code>,
              <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
              <span style="font-weight: bold;">:recursive</span> t
              <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
-             <span style="font-weight: bold;">:exclude</span> <span style="font-style: italic;">"</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">build</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">stocks</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">.org"</span>
+             <span style="font-weight: bold;">:exclude</span> <span style="font-style: italic;">"</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">build</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">^stocks</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">.org"</span>
              <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./archive"</span>
              <span style="font-weight: bold;">:publishing-function</span> 'org-latex-publish-to-latex
              <span style="font-weight: bold;">:headline-levels</span> 5
              <span style="font-weight: bold;">:latex-listings</span> 'minted
              <span style="font-weight: bold;">:section-numbers</span> nil
-             <span style="font-weight: bold;">:with-toc</span> nil)))
+             <span style="font-weight: bold;">:with-toc</span> nil)
+       (list <span style="font-style: italic;">"seangllghr.github.io:archive-static"</span>
+             <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"./src"</span>
+             <span style="font-weight: bold;">:recursive</span> t
+             <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"jpg</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">gif</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">png</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">svg"</span>
+             <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"./archive"</span>
+             <span style="font-weight: bold;">:publishing-function</span> 'org-publish-attachment)))
 (<span style="font-weight: bold;">if</span> (string= (system-name) <span style="font-style: italic;">"Asgard"</span>)
     (<span style="font-weight: bold;">setq</span> org-publish-project-alist
           (append org-publish-project-alist latex-publish-alist)))
