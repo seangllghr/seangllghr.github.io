@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2021-12-20 Mon 01:21 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reaching Out to the Market</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Sean Gallagher">
+<link
+    href="https://cdn.simplecss.org/simple.min.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<link
+    href="/styles/styles.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<header id="header" class="status">
+<h1>Sean Gallagher</h1>
+<nav>
+  <a href="/">Home</a>
+  <a href="/stocks.html">The STOCKS Application</a>
+  <a href="/build.html">How it's Made</a>
+</nav>
+</header>
+<main id="content">
+
+<div id="outline-container-org276fb5e" class="outline-2">
+<h2 id="org276fb5e">Reaching Out to the Market</h2>
+<div class="outline-text-2" id="text-org276fb5e">
+<p>
+With the initial reimplementation of the core server application completed,
+    development on meaningful expansions
+    to the application's capabilities could begin.
+Since the application database was still nearly empty,
+    starting work on front-end development didn't seem to make much sense,
+    so focus shifted to expanding the server application
+    with what would become the <code>market-sync</code> module.
+In writing the original proposal for the module — which
+was to implement a REST client service
+    that would synchronize the STOCKS application's internal database
+    with the relevant subset of real-world market data
+    obtained from a third-party API — I
+    thinking that it would likely constitute the smallest enhancement
+    by raw contribution to the codebase,
+    but its effect on the overall utility of the application
+    would dwarf that of other modules.
+In retrospect,
+    the capabilities introduced in <code>market-sync</code>
+    quickly came to define the application as a whole
+    as development progressed through the final two phases of the project.
+</p>
+</div>
+<div id="outline-container-orge3b985a" class="outline-3">
+<h3 id="orge3b985a">Interfacing with Reality</h3>
+<div class="outline-text-3" id="text-orge3b985a">
+<p>
+Stock market data changes at a blistering pace,
+    with some APIs offering real-time trade data
+    that updates several times per second.
+Of course, such a volume of data doesn't come cheap,
+    and real-time API access was well outside
+    what I could reasonably justify paying.
+After some research,
+    I selected <a href="https://alphavantage.co/">AlphaVantage</a> as the third-party provider
+    and registered for their free tier of service.
+This restricted me to a limit of 5 API calls per minute
+    and a daily limit of 500 total calls.
+Equally problematic was the fact that I'd configured the application
+    to take advantage of MongoDB Atlas at its free tier.
+Atlas is a cloud database service
+    offered by the company that develops the MongoDB software,
+    which handles database setup
+    and configuration of features like sharding and authentication.
+They offer a free tier of service for experimentation and study,
+    but it comes with a restrictive 512MB limit on database size.
+</p>
+
+<p>
+Between these two constraints,
+    it quickly became clear that updating any substantial database of stocks
+    would be an exercise in careful coordination.
+To limit both database size and update frequency,
+    I chose to pull daily time series data from AlphaVantage's API,
+    which seemed like a good compromise
+    between ensuring that data was fairly current
+    and respecting the limitations of the free services I depended on.
+Examining the API documentation
+    revealed another potential snag in the update process:
+    in order to conform to the data model
+    developed in the first phase of development
+    and provide actionable market data
+    for the analysts who might eventually use the application,
+    the <code>market-sync</code> service would need to aggregate data
+    from two separate API calls.
+</p>
+</div>
+</div>
+<div id="outline-container-org4ea3871" class="outline-3">
+<h3 id="org4ea3871">Database Problems, Data Structures Solutions</h3>
+<div class="outline-text-3" id="text-org4ea3871">
+<p>
+Despite the fact that the <code>market-sync</code> service
+    began its life as a database-focused enhancement,
+    managing the constraints imposed by the third-party provider
+    called for an approach rooted in concepts of Data Structures and Algorithms.
+The first step was to atomize update operations;
+    I defined an update object interface that could enforce a known structure
+    on objects containing information about upcoming updates,
+    as well as an update type <code>enum</code>
+    to reliably indicate which update function to execute
+    within a narrow, predefined set.
+</p>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>\label{lst:update-object}The <code>UpdateObject</code> and its related <code>UpdateType</code> <code>enum</code>.</label><pre class="src src-typescript" id="org5d4d2ad">enum UpdateType {
+  OVERVIEW = 1,
+  TIME_SERIES,
+  DEFER,
+}
+
+interface UpdateObject {
+  updateType: UpdateType;
+  symbol: string;
+}
+</pre>
+</div>
+
+<p>
+With these structures established,
+    I implemented a simple queue to track pending update operations
+    using direct calls to Javascript array methods.
+Since this was the only instance of queuing in the application,
+    I didn't go through the extra effort
+    of implementing a fully-formed <code>Queue</code> type
+    or pulling in another dependency
+    for one written by another developer.
+Regardless,
+    the result was an effective queue for <code>UpdateObjects</code>.
+All that remained was to schedule a recurring task
+    that would run each successive update
+    with an appropriate gap between each.
+There were a number of potential solutions to this scheduling problem,
+    but, once again, Nest.js provided a solution
+    that quickly became the clear front-runner.
+Nest's scheduling module,
+    which relies on a pure Javascript implementation of UNIX/Linux's <code>cron</code>,
+    provided a familiar interface to task scheduling,
+    particularly for a Linux enthusiast like myself.
+Soon,
+    the application was running an update every 12 seconds,
+    making short work of the update queue — and,
+    once I started repopulating the update queue when it emptied,
+    rapidly consuming my 500-call-per-day limit.
+Another <code>cron</code> job quickly sorted this problem out,
+    scheduling an update for a reasonable post-market time each night.
+</p>
+
+<p>
+The final challenge with maintaining a low-limit system
+    was fundamentally a development concern,
+    rather than one that would crop up in production,
+    but it proved to be one of the more intractable issues to nail down.
+Each time the server started,
+    the system would queue a time series update
+    for each stock in the database.
+During development, this could happen dozens of times in an hour,
+    let alone over the course of a work day.
+Since there is no advantage to refreshing daily data more than once per day,
+    the simple solution was to update only at the specified time.
+However, this was also sub-optimal,
+    since there was no guarantee that the development system
+    would be online at 01:00 UTC,
+    the specified update time.
+Ultimately, the ideal solution was to examine the timestamp of each stock
+    and update only if the stock had not updated since the last market close.
+</p>
+</div>
+</div>
+<div id="outline-container-orga87287a" class="outline-3">
+<h3 id="orga87287a">A Strong, Flexible Skeleton</h3>
+<div class="outline-text-3" id="text-orga87287a">
+<p>
+With the completion of the market sync service,
+    development of the STOCKS application stood poised to progress
+    into the third and final phase of development,
+    and it would do so buoyed by the strengths of a robust back end.
+The core API, data model, and <code>market-sync</code> services
+    would all have a chance to prove their flexibility and extensibility,
+    as each grew and changed during this final phase
+    to accommodate the excesses of the front-end developer<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+The <code>market-sync</code> module fared better in the face of this expansion
+    precisely because of it's modular design
+    and well-considered data structures.
+These decisions were informed by careful comparison
+    of the various relevant options,
+    and made use of modern, progressive technologies
+    which lent themselves to the evolving environment of a full-stack application.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">I was my own worst enemy,
+    in terms of scope creep and ambition,
+    throughout this project,
+    but nowhere was this more apparent
+    than during the WebSTOCKS development process.</div></div>
+
+
+</div>
+</div></main>
+<footer id="footer" class="status">
+<p>&copy;&thinsp;2021 Sean Gallagher<br><a href="mailto:seangllghr@gmail.com">seangllghr@gmail.com</a></p>
+</footer>
+</body>
+</html>
