@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-12-20 Mon 01:21 -->
+<!-- 2021-12-20 Mon 01:27 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reaching Out to the Market</title>
@@ -17,28 +17,6 @@
     rel="stylesheet"
     type="text/css"
 />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <header id="header" class="status">
@@ -51,9 +29,9 @@
 </header>
 <main id="content">
 
-<div id="outline-container-org276fb5e" class="outline-2">
-<h2 id="org276fb5e">Reaching Out to the Market</h2>
-<div class="outline-text-2" id="text-org276fb5e">
+<div id="outline-container-org7d3c0de" class="outline-2">
+<h2 id="org7d3c0de">Reaching Out to the Market</h2>
+<div class="outline-text-2" id="text-org7d3c0de">
 <p>
 With the initial reimplementation of the core server application completed,
     development on meaningful expansions
@@ -77,9 +55,9 @@ In retrospect,
     as development progressed through the final two phases of the project.
 </p>
 </div>
-<div id="outline-container-orge3b985a" class="outline-3">
-<h3 id="orge3b985a">Interfacing with Reality</h3>
-<div class="outline-text-3" id="text-orge3b985a">
+<div id="outline-container-org8064a54" class="outline-3">
+<h3 id="org8064a54">Interfacing with Reality</h3>
+<div class="outline-text-3" id="text-org8064a54">
 <p>
 Stock market data changes at a blistering pace,
     with some APIs offering real-time trade data
@@ -122,9 +100,9 @@ Examining the API documentation
 </p>
 </div>
 </div>
-<div id="outline-container-org4ea3871" class="outline-3">
-<h3 id="org4ea3871">Database Problems, Data Structures Solutions</h3>
-<div class="outline-text-3" id="text-org4ea3871">
+<div id="outline-container-org461aacb" class="outline-3">
+<h3 id="org461aacb">Database Problems, Data Structures Solutions</h3>
+<div class="outline-text-3" id="text-org461aacb">
 <p>
 Despite the fact that the <code>market-sync</code> service
     began its life as a database-focused enhancement,
@@ -138,7 +116,7 @@ The first step was to atomize update operations;
     within a narrow, predefined set.
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>\label{lst:update-object}The <code>UpdateObject</code> and its related <code>UpdateType</code> <code>enum</code>.</label><pre class="src src-typescript" id="org5d4d2ad">enum UpdateType {
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>The <code>UpdateObject</code> and its related <code>UpdateType</code> <code>enum</code>.</label><pre class="src src-typescript" id="org0d278a0">enum UpdateType {
   OVERVIEW = 1,
   TIME_SERIES,
   DEFER,
@@ -202,9 +180,9 @@ Ultimately, the ideal solution was to examine the timestamp of each stock
 </p>
 </div>
 </div>
-<div id="outline-container-orga87287a" class="outline-3">
-<h3 id="orga87287a">A Strong, Flexible Skeleton</h3>
-<div class="outline-text-3" id="text-orga87287a">
+<div id="outline-container-orgf111103" class="outline-3">
+<h3 id="orgf111103">A Strong, Flexible Skeleton</h3>
+<div class="outline-text-3" id="text-orgf111103">
 <p>
 With the completion of the market sync service,
     development of the STOCKS application stood poised to progress
