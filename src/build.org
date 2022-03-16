@@ -129,9 +129,10 @@ Since we aren't loading my personal config,
       user-mail-address "seangllghr@gmail.com")
 #+end_src
 We declare strings
-    to hold our custom HTML header
-    (the footer is short, so we set that inline),
-    as well as a link to the [[https://simplecss.org/][Simple.css]] CDN:
+    to hold our custom HTML header and footer,
+    including some code to make sure
+    the copyright date in the footer updates appropriately,
+    and a link to the [[https://simplecss.org/][Simple.css]] CDN:
 #+begin_src emacs-lisp :tangle ../publish.el
 (setq
  styles "<link
@@ -149,13 +150,16 @@ We declare strings
   <a href=\"/\">Home</a>
   <a href=\"/stocks.html\">The STOCKS Application</a>
   <a href=\"/build.html\">How it's Made</a>
-</nav>")
+</nav>"
+ footer (concat "<p>&copy;&thinsp;2021&ndash;"
+                (format-time-string "%Y")
+                " %a<br>%e</p>"))
 #+end_src
 We can then use these values to explicitly set the appropriate ~org-mode~ values:
 #+begin_src emacs-lisp :tangle ../publish.el
 (setq org-html-head styles
       org-html-preamble header
-      org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>"
+      org-html-postamble footer
       org-src-preserve-indentation t)
 #+end_src
 If we're running on my home workstation

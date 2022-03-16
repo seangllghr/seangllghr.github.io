@@ -29,11 +29,14 @@
   <a href=\"/\">Home</a>
   <a href=\"/stocks.html\">The STOCKS Application</a>
   <a href=\"/build.html\">How it's Made</a>
-</nav>")
+</nav>"
+ footer (concat "<p>&copy;&thinsp;2021&ndash;"
+                (format-time-string "%Y")
+                " %a<br>%e</p>"))
 
 (setq org-html-head styles
       org-html-preamble header
-      org-html-postamble "<p>&copy;&thinsp;2021 %a<br>%e</p>"
+      org-html-postamble footer
       org-src-preserve-indentation t)
 
 (if (string= (system-name) "Asgard")
