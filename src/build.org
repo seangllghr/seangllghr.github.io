@@ -66,6 +66,9 @@ if [ $# -gt 0 ]; then
       chromium --app="http://localhost:3000" --class=noswallow \
         --auto-open-devtools-for-tabs --force-dark-mode \
         >/dev/null 2>&1 &
+      alacritty -e sh build autobuild &
+      ;;
+    "autobuild")
       inotifywait -rm ./ -e close_write |
         while read directory action file; do
           if [ "$file" = "publish.el" ] || [ -z "${directory##./src*}" ];
