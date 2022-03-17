@@ -163,7 +163,9 @@ We can then use these values to explicitly set the appropriate ~org-mode~ values
       org-src-preserve-indentation t)
 #+end_src
 If we're running on my home workstation
-    (and, therefore, generating @@html: $\mathrm{\LaTeX}$@@ @@latex: \LaTeX\ @@ files),
+    (and, therefore, generating
+    @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
+    @@latex: \LaTeX\ @@ files),
     we also need to change some relevant export settings.
 The first part of this monstrous nightmare defines a list of packages
     that the exporter should include,
@@ -281,20 +283,22 @@ Finally, we set our main configuration ~alist~,
 There are three publish processes in here:
     an org-to-HTML process that generates the content pages,
     a process to copy over any static assets,
-    and — if we're on my local machine — a final job
-    to generate @@html: $\mathrm{\LaTeX}$@@ @@latex: \LaTeX\ @@ files
-    from the relevant org files,
+    and — if we're on my local machine — a final job to generate
+    @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
+     @@latex: \LaTeX\ @@ files from the relevant org files,
     which I'll turn into PDFs using ~latexmk~ on my local machine.
 The last job gets appended only if
-    the hostname matches my primary workstation;[fn::
+    the hostname matches my primary workstation[fn::
     Isn't Lisp such an elegant language?
     With all of those parentheses and bizarre indentation... 🤌
     Joking aside,
     that took far too long to puzzle out.
     Who thinks about code that way?
     I love how powerful Emacs and org-mode are,
-    but I don't love actually programming it.]
-    this saves GitHub's CI servers some time exporting the LaTeX files,
+    but I don't love actually programming it.];
+    this saves GitHub's CI servers some time exporting the
+    @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>,@@
+    @@latex: \LaTeX,@@
     which I'm sure they appreciate.
 
 Finally, we run the publishing command:
