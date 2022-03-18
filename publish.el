@@ -27,6 +27,7 @@
  header "<h1>Sean Gallagher</h1>
 <nav>
   <a href=\"/\">Home</a>
+  <a href=\"/resume.html\">Résumé</a>
   <a href=\"/stocks.html\">The STOCKS Application</a>
   <a href=\"/build.html\">How it's Made</a>
 </nav>"

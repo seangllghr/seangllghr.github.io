@@ -1,0 +1,103 @@
+#+title: Sean Gallagher — Résumé
+# #+html_head: <script src="https://kit.fontawesome.com/5eb8d43980.js" crossorigin="anonymous"></script>
+# #+html: <header>
+* Sean Gallagher
+:PROPERTIES:
+:HTML_HEADLINE_CLASS: header
+:END:
+- @@html: <span class="fas fa-phone"></span>@@ @@html:<a href="tel:+15183626816">518.362.6816</a>@@
+- @@html: <span class="fas fa-map-marker-alt"></span>@@ 15 Swatling Rd. Apt. 1, Latham, NY 12110
+- @@html: <span class="fas fa-envelope-open"></span>@@ [[mailto:seangllghr@gmail.com][seangllghr@gmail.com]]
+- @@html: <span class="fab fa-github"></span>@@ [[https://github.com/seangllghr][seangllghr]]
+** Summary
+Dedicated, self-motivated student of software engineering with an interest in
+web technologies, visual design, and open source software. 11 years experience
+in customer-facing and instructional positions with 7 years experience leading
+teams of 5--50 people
+# #+html: </header>
+# #+html: <main>
+** Education
+*** Bachelor of Science, Computer Science
+- Focus :: Concentration in Software Engineering
+- Institution :: Southern New Hampshire University, Manchester, NH. April 2022 (Awaiting Conferral)
+*** Associates of Applied Arts and Sciences, Adventure Sports Leadership and Management
+- Focus :: Dual Concentration in Snowsports Instruction and Challenge Course Facilitation & Management\\
+- Institution :: State University of New York Adirondack, Queensbury, NY. 2012
+** Technical Skills
+*** Languages:
+- Javascript/Typescript
+- HTML
+- CSS
+- Python
+- Bash
+- Java
+- \LaTeX
+*** Tools and Technologies
+- Node.js
+- Angular
+- Nest.js
+- JSON
+- Adobe Illustrator
+- Adobe InDesign
+*** Operating Systems
+- Linux
+- Windows
+** Experience
+*** Program Director
+- Period :: Summer Seasonal, 2017--2019
+- Employer :: Camp Wakpominee, Twin Rivers Council, Boy Scouts of America
+- Led a team of 10 program area directors responsible for a total of more than
+  50 program area staff members.
+- Designed forms, schedule handouts, and other hard copy documents related to
+  daily and weekly camp activities using a variety of design tools, including
+  HTML/CSS-to-PDF toolchains using Prince, Microsoft Office and LibreOffice,
+  Adobe Illustrator and InDesign.
+- Automated publication of a daily newsletter, using Node.js to ingest a
+  Markdown/plaintext feature article source and JSON daily schedule to build an
+  HTML file for PDF conversion.
+- Installed and configured a dedicated Linux server that handled weekly
+  paperwork and provision of common network resources within the camp office.
+- Handled routine IT configuration and troubleshooting tasks for the camp
+  office's heterogeneous network environment, including Linux, Windows, and
+  MacOS systems.
+*** Snow Pro
+- Period :: Winter Seasonal, 2013--19
+- Employer :: Ski and Snowboard Schools of Aspen/Snowmass, Aspen Skiing Company
+- Instructed an international clientele of children and adults in downhill
+  skiing skills
+- Facilitated guest interactions with other Aspen Skiing Company departments and
+  outside service providers, including lesson sales and ticketing, rendals,
+  dining, and transportation services
+*** Aquatics Director
+- Period :: Summer Seasonal 2016
+- Employer :: Henderson Scout Reservation, Leatherstocking Council, Boy Scouts of America
+- Managed a team of four aquatics instructors responsible for lifeguard
+  coverage and skill instruction for camp aquatics activities
+- Led weekly off-site canoe trips of 30--50 Scouts
+# - Developed and deployed an intranet portal for distributing materials for Merit
+#   Badge instruction
+*** Aquatics Director
+- Period :: Summer Seasonal 2013--2015
+- Employer :: Camp Wakpominee, Twin Rivers Council, Boy Scouts of America
+** Volunteer Experience
+*** Committee Member
+- Period :: 2013--Present
+- Organization :: Council Aquatics Committee, Twin Rivers Council, Boy Scouts of America
+- Kept and published minutes for regular committee meetings using \LaTeX and
+  Emacs org-mode
+- Designed, using Adobe Illustrator, an award patch recognizing dedication to
+  camp and council aquatics programs
+- Facilitated an annual pre-camp training program for aquatics staff from both
+  council camps
+*** Aquatics Section Faculty
+- Period :: June 2015--June 2019
+- Organization :: National Camping School Adirondack Section, Boy Scouts of America
+- Taught water rescue, swimming, and boating skills to aquatics director
+  candidates from across the United States
+- Trained candidates in crucial managerial soft skills, including interpersonal
+  interaction, conflict resolution, and effective teaching
+** Languages Spoken
+- English :: Native Speaker
+- Spanish :: Fluent
+# - Portuguese :: Basic
+# #+html: </main>
