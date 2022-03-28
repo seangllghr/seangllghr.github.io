@@ -14,7 +14,7 @@
       user-mail-address "seangllghr@gmail.com")
 
 (setq
- styles "<link
+ dependencies "<link
     href=\"https://cdn.simplecss.org/simple.min.css\"
     rel=\"stylesheet\"
     type=\"text/css\"
@@ -23,7 +23,8 @@
     href=\"/styles/styles.css\"
     rel=\"stylesheet\"
     type=\"text/css\"
-/>"
+/>
+<script src=\"https://kit.fontawesome.com/5eb8d43980.js\" crossorigin=\"anonymous\"></script>"
  header "<h1>Sean Gallagher</h1>
 <nav>
   <a href=\"/\">Home</a>
@@ -35,9 +36,10 @@
                 (format-time-string "%Y")
                 " %a<br>%e</p>"))
 
-(setq org-html-head styles
+(setq org-html-head dependencies
       org-html-preamble header
       org-html-postamble footer
+      org-html-container-element "section"
       org-src-preserve-indentation t)
 
 (if (string= (system-name) "Asgard")

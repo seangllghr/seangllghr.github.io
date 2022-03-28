@@ -138,7 +138,7 @@ We declare strings
     and a link to the [[https://simplecss.org/][Simple.css]] CDN:
 #+begin_src emacs-lisp :tangle ../publish.el
 (setq
- styles "<link
+ dependencies "<link
     href=\"https://cdn.simplecss.org/simple.min.css\"
     rel=\"stylesheet\"
     type=\"text/css\"
@@ -147,7 +147,8 @@ We declare strings
     href=\"/styles/styles.css\"
     rel=\"stylesheet\"
     type=\"text/css\"
-/>"
+/>
+<script src=\"https://kit.fontawesome.com/5eb8d43980.js\" crossorigin=\"anonymous\"></script>"
  header "<h1>Sean Gallagher</h1>
 <nav>
   <a href=\"/\">Home</a>
@@ -161,9 +162,10 @@ We declare strings
 #+end_src
 We can then use these values to explicitly set the appropriate ~org-mode~ values:
 #+begin_src emacs-lisp :tangle ../publish.el
-(setq org-html-head styles
+(setq org-html-head dependencies
       org-html-preamble header
       org-html-postamble footer
+      org-html-container-element "section"
       org-src-preserve-indentation t)
 #+end_src
 If we're running on my home workstation
