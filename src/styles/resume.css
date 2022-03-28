@@ -1,0 +1,119 @@
+/*** Resume styles ***/
+
+h2, h3, h4, p, dl, ul {
+    margin: 0.25rem 0;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+h3, h4 {
+    font-size: 1.05rem;
+}
+
+p, ul, dl {
+    font-size: 1.05rem;
+}
+
+dt {
+  display: none;
+}
+
+dd {
+  margin-left: 0;
+}
+
+dd:first-of-type, dd:nth-of-type(2) {
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+ul {
+    padding: 0;
+    list-style-position: inside;
+}
+
+ul li::marker {
+    content: "— ";
+}
+
+#summary {
+  display: none;
+}
+
+#outline-container-summary ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: -.75rem 0 .5rem;
+}
+
+.summary ul li::marker {
+    content: none;
+}
+
+.skills ul {
+    columns: 3;
+}
+
+.languages dt, .languages dd {
+    display: initial;
+}
+
+.languages dt::after {
+    content: ": "
+}
+
+.languages dd {
+    margin-inline-end: 1rem;
+}
+
+@media print {
+
+    @page {
+        size: letter portrait;
+        margin: 0.375in 0.75in;
+    }
+
+    :root {
+        font-size: 10pt;
+    }
+
+    body > header {
+        border-bottom: 1pt solid #282828;
+    }
+
+    body > header h1 {
+        font-size: 2rem;
+        margin: 0 auto 0.5rem;
+    }
+
+    h2, h3, h4, p, dl, ul {
+        margin: 0.0625rem 0;
+    }
+
+    p, dl, ul {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    nav {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .summary p {
+        hyphens: auto;
+        margin: 0 auto;
+        text-align: justify;
+        width: 5.125in;
+    }
+
+    .position {
+        break-inside: avoid;
+    }
+}
