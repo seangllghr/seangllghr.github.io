@@ -57,16 +57,34 @@ publish () {
   emacs -Q --script publish.el
 }
 
+getterm () {
+  if command -v alacritty; then
+    terminal="alacritty"
+  elif command -v konsole; then
+    terminal="konsole"
+  else
+    echo "No compatible terminal emulator found. Aborting..."
+    exit 1
+  fi
+}
+
 if [ $# -gt 0 ]; then
   case "$1" in
     "start")
-      alacritty -e \
+      getterm
+      $terminal -e \
         live-server public/ --port=3000 --no-browser &
       sleep 1
       chromium --app="http://localhost:3000" --class=noswallow \
         --auto-open-devtools-for-tabs --force-dark-mode \
         >/dev/null 2>&1 &
-      alacritty -e sh build autobuild &
+      $terminal -e sh build autobuild &
+      ;;
+    "min")
+      getterm
+      $terminal -e \
+        live-server public/ --port=3000 --no-browser &
+      $terminal -e sh build autobuild &
       ;;
     "autobuild")
       inotifywait -rm ./ -e close_write |
@@ -81,6 +99,8 @@ if [ $# -gt 0 ]; then
     "clean")
       rm -rf public archive
       ;;
+    *)
+      echo "Invalid action. Please select start, min, or clean."
   esac
 else
   publish
