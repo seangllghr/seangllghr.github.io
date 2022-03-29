@@ -8,6 +8,7 @@
 - @@html: <span class="fas fa-phone"></span>@@ @@html:<a href="tel:+15183626816">518.362.6816</a>@@
 - @@html: <span class="fas fa-envelope-open"></span>@@ [[mailto:seangllghr@gmail.com][seangllghr@gmail.com]]
 - @@html: <span class="fab fa-github"></span>@@ [[https://github.com/seangllghr][seangllghr]]
+- @@html: <span class="fas fa-folder"></span>@@ [[https://seangllghr.github.io][seangllghr.github.io]]
 # - @@html: <span class="fas fa-map-marker-alt"></span>@@ 15 Swatling Rd. Apt. 1, Latham, NY 12110
 
 Dedicated, self-motivated full-stack developer with an interest in
