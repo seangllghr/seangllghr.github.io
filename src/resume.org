@@ -126,6 +126,7 @@ teams of 5--50 people
 :END:
 - Period :: June 2015--June 2019
 - Organization :: National Camping School Adirondack Section, Boy Scouts of America
+- Summary ::
   - Taught water rescue, swimming, and boating skills to aquatics director
     candidates
   - Trained candidates in crucial managerial soft skills, including interpersonal
