@@ -42,6 +42,7 @@ ul li::marker {
   display: none;
 }
 
+#text-summary ul,
 #outline-container-summary ul {
     display: flex;
     justify-content: space-between;
