@@ -23,6 +23,14 @@ code, kbd, pre, pre span, samp {
     font-size: calc(var(--base-font-size) * 0.95);
 }
 
+body header {
+  padding-bottom: 0;
+}
+
+nav {
+  padding-top: 0;
+}
+
 .footpara {
     display: inline;
 }
@@ -30,4 +38,27 @@ code, kbd, pre, pre span, samp {
 #footnotes h2 {
   font-size: calc(var(--base-fontsize) * var(--header-scale) * var(--header-scale));
   margin-top: calc(var(--line-height) * 1.5rem)
+}
+
+/* LaTeX logo styles from Vincent Döring's LaTeX.css:
+ * https://latex.vercel.app/ */
+.latex {
+  font-family: 'TeX Gyre Pagella', Palatino, 'Palatino Linotype', serif;
+}
+
+.latex span:nth-child(1) {
+  text-transform: uppercase;
+  font-size: 0.75em;
+  vertical-align: 0.28em;
+  margin-left: -0.48em;
+  margin-right: -0.15em;
+  line-height: 1ex;
+}
+
+.latex span:nth-child(2) {
+  text-transform: uppercase;
+  vertical-align: -0.5ex;
+  margin-left: -0.1667em;
+  margin-right: -0.125em;
+  line-height: 1ex;
 }
