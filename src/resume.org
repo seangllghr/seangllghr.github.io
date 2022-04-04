@@ -116,8 +116,9 @@ teams of 5--50 people
 - Period :: 2013--Present
 - Organization :: Council Aquatics Committee, Twin Rivers Council, Boy Scouts of America
 - Summary ::
-  - Kept and published minutes for regular committee meetings using \LaTeX and
-    Emacs org-mode
+  - Kept and published minutes for regular meetings
+    using @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
+    and Emacs org-mode
   - Designed, using Adobe Illustrator, a patch recognizing dedication to aquatics programs
   - Facilitated an annual pre-camp training program for aquatics staff from both
     council camps
