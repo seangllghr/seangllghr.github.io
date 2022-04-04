@@ -121,6 +121,11 @@ ul li::marker {
         line-height: 1;
     }
 
+    a, a:visited {
+        color: #282828;
+        text-decoration: none;
+    }
+
     nav {
         display: none;
     }
@@ -129,7 +134,25 @@ ul li::marker {
         display: none;
     }
 
+    .summary ul {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .summary p {
+        text-align: justify;
+    }
+
+    .skills ul {
+        columns: 3;
+    }
+
     .position {
         break-inside: avoid;
+    }
+
+    .languages dt, .languages dd {
+        display: inline;
+        margin-inline-start: unset;
     }
 }
