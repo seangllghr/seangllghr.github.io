@@ -42,12 +42,18 @@ ul li::marker {
   display: none;
 }
 
-#text-summary ul,
-#outline-container-summary ul {
+.summary ul {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     list-style: none;
     margin: -.75rem 0 .5rem;
+}
+
+.summary p {
+    hyphens: auto;
+    margin: 0 auto;
+    text-align: justify;
+    max-width: 40rem;
 }
 
 .summary ul li::marker {
@@ -68,6 +74,13 @@ ul li::marker {
 
 .languages dd {
     margin-inline-end: 1rem;
+}
+
+@media screen and (min-width: 40rem) {
+    .summary ul {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 @media print {
@@ -105,13 +118,6 @@ ul li::marker {
 
     footer {
         display: none;
-    }
-
-    .summary p {
-        hyphens: auto;
-        margin: 0 auto;
-        text-align: justify;
-        width: 5.125in;
     }
 
     .position {
