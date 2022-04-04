@@ -63,11 +63,14 @@ teams of 5--50 people
 - Employer :: Camp Wakpominee, Twin Rivers Council, Boy Scouts of America
 - Summary ::
   - Led a team of 10 program area directors responsible for a total of more than
-    50 program area staff.
-  - Designed forms, schedule handouts, and other hard copy documents related to
-    daily and weekly camp activities using a variety of design tools, including
-    HTML/CSS-to-PDF toolchains using Prince, Microsoft Office and LibreOffice,
-    Adobe Illustrator and InDesign.
+    50 program staff.
+  - Designed forms, schedule handouts, and other hard copy documents
+    related to camp program and activities,
+    using proprietary design tools and open-source alternatives,
+    including HTML/CSS-to-PDF toolchains,
+    Microsoft Office,
+    Adobe Illustrator,
+    and Adobe InDesign.
   - Automated publication of a daily newsletter, using Node.js to ingest a
     Markdown/plaintext feature article source and JSON daily schedule to build an
     HTML file for PDF conversion.
@@ -86,7 +89,7 @@ teams of 5--50 people
   - Instructed an international clientele of children and adults in downhill
     skiing skills
   - Facilitated guest interactions with other Aspen Skiing Company departments and
-    outside service providers, including lesson sales and ticketing, rendals,
+    outside service providers, including lesson sales and ticketing, rentals,
     dining, and transportation services
 ** Aquatics Director
 :PROPERTIES:
