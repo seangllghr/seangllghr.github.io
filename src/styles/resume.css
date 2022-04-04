@@ -52,7 +52,6 @@ ul li::marker {
 .summary p {
     hyphens: auto;
     margin: 0 auto;
-    text-align: justify;
     max-width: 40rem;
 }
 
@@ -60,12 +59,8 @@ ul li::marker {
     content: none;
 }
 
-.skills ul {
-    columns: 3;
-}
-
-.languages dt, .languages dd {
-    display: initial;
+.languages dt {
+    display: unset;
 }
 
 .languages dt::after {
@@ -73,6 +68,7 @@ ul li::marker {
 }
 
 .languages dd {
+    margin-inline-start: 1rem;
     margin-inline-end: 1rem;
 }
 
@@ -80,6 +76,19 @@ ul li::marker {
     .summary ul {
         flex-direction: row;
         justify-content: space-between;
+    }
+
+    .summary p {
+        text-align: justify;
+    }
+
+    .skills ul {
+        columns: 3;
+    }
+
+    .languages dt, .languages dd {
+        display: inline;
+        margin-inline-start: unset;
     }
 }
 
