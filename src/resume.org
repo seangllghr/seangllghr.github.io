@@ -36,8 +36,9 @@ teams of 5--50 people
 - HTML
 - CSS
 - Python
-- Bash
 - Java
+- C/C++
+- Bash
 - @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
 ** Tools and Technologies
 - Node.js
