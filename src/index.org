@@ -7,7 +7,7 @@ The online version of this portfolio is available at
 #+end_export
 I'm a full-stack developer
     with experience across a wide array of technologies
-    and an unhealthy interest [[file:build.org][in obscure publishing technologies]].
+    and an unhealthy interest in [[file:build.org][obscure publishing technologies]].
 This portfolio presents a snapshot of what I can do.
 While there are a number of projects I'm still polishing for inclusion,
     I think the content here provides a broad-stroke overview of my best work,
@@ -16,6 +16,7 @@ While there are a number of projects I'm still polishing for inclusion,
 #+name: img:webstocks
 #+attr_latex: :width \textwidth
 [[./media/webstocks.png]]
+
 The STOCKS Application is a full-stack web application
     with a minimal, retro look-and-feel
     built according to the latest industry standards.
