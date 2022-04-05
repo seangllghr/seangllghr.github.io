@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-04-05 Tue 20:43 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventoryapp</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Sean Gallagher">
+<link
+    href="https://cdn.simplecss.org/simple.min.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<link
+    href="/styles/styles.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<script src="https://kit.fontawesome.com/5eb8d43980.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header id="header" class="status">
+<h1>Sean Gallagher</h1>
+<nav>
+  <a href="/">Home</a>
+  <a href="/resume.html">Résumé</a>
+  <a href="/build.html">How it's Made</a>
+</nav>
+</header>
+<main id="content">
+
+<section id="outline-container-orge829390" class="outline-2">
+<h2 id="orge829390">ClientCompany, Inc.'s InventoryApp</h2>
+<div class="outline-text-2" id="text-orge829390">
+<p>
+If I had to describe my software development journey in a single witticism,
+    “learning new techniques and technologies in uncomfortably short time frames,”
+    would do the trick nicely.
+Nowhere was this more true than during a course I took on mobile development.
+The course itself was short enough from the outset—unlike most colleges,
+    SNHU's online program consisted of a relentless series of 8-week terms,
+    48 weeks per year—but I managed to compress this timeline even further.
+</p>
+
+<p>
+The task was fairly straightforward:
+    build an inventory tracking app for Android
+    with rudimentary user login functionality
+    and a simple grid-based inventory management interface.
+While this was my first exposure to Android development,
+    the coursework and textbook were written with Java in mind;
+    I'd written a fair amount of Java in previous courses,
+    and I assumed I'd take the path of least resistance
+    and write this app in Java, as well.
+Once I started development on the actual application logic, however,
+    it became abundantly clear that Java was not the path of least resistance.
+In the time since the course material had been written,
+    Android development had taken a hard turn towards Kotlin,
+    a language with sophisticated features
+    for handling the complexities of modern application development.
+I soldiered on for a week or two,
+    convinced that I could make things work,
+    but progress was slow,
+    and the promise of Kotlin lurked just out of reach,
+    sequestered behind the gate of learning an entirely new language.
+</p>
+
+
+<figure id="org829b7bd">
+<img src="../media/login_dark.png" alt="login_dark.png" style="max-width: 393px;">
+
+<figcaption><span class="figure-number">Figure 1: </span>The application's user login screen. Simple, but functional.</figcaption>
+</figure>
+
+<p>
+The straw that finally broke my back was asynchronous programming;
+    I'd used it in Python for a previous project,
+    and I knew it was the best way to approach a particular task,
+    but Java's approach to the technique—at least at the time—was arcane,
+    built out in third-party libraries
+    that would introduce a whole new layer of unnecessary complexity.
+In a moment of desperation,
+    I pulled up the Kotlin language documentation,
+    and there it was.
+Asynchronous programming was built-in,
+    a fundamental paradigm around which the language had planned from the start.
+That was the solution, then!
+I just had to learn this new language
+    and use it to write an entire application&#x2026;
+In two weeks.
+</p>
+
+
+<figure id="org24a8436">
+<img src="../media/add_user_form_dark.png" alt="add_user_form_dark.png" style="max-width: 393px;">
+
+<figcaption><span class="figure-number">Figure 2: </span>Trying to login with a nonexistent user brings up a prompt to add a user. This form extends the login form to accomplish that task.</figcaption>
+</figure>
+
+<p>
+It seemed like an impossible task,
+    but I knew I'd be a better developer for it,
+    so I hunkered down,
+    put my nose to the grindstone,
+    and wrote InventoryApp,
+    <a href="https://github.com/seangllghr/portfolio-inventoryapp">preserved here</a> in exactly<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> the state it was in
+    at the end of that two-week sprint.
+It's not cleverly named,
+    and it's not going to win any awards for visual design,
+    but it's a perfectly viable prototype
+    that stands as a testament to my ability to hit the ground running.
+That may not be the only skill a developer needs,
+    but it might be the hardest to acquire,
+    and it's one I've gotten a lot of opportunities to practice.
+</p>
+
+
+<figure id="org3866bcd">
+<img src="../media/inventory_overview_dark.png" alt="inventory_overview_dark.png" style="max-width: 393px;">
+
+<figcaption><span class="figure-number">Figure 3: </span>Database connectivity didn't quite make the final app, but the app is otherwise functional.</figcaption>
+</figure>
+</div>
+</section>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">Well, not <i>exactly</i>;
+    I updated the project to gradle 7.1.2
+    when I went back and built it to get screenshots.
+    However, the actual application code is unchanged.</div></div>
+
+
+</div>
+</div></main>
+<footer id="footer" class="status">
+<p>&copy;&thinsp;2021&ndash;2022 Sean Gallagher<br><a href="mailto:seangllghr@gmail.com">seangllghr@gmail.com</a></p>
+</footer>
+</body>
+</html>

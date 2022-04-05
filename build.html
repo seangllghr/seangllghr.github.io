@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-04-04 Mon 15:49 -->
+<!-- 2022-04-05 Tue 20:43 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About this Portfolio</title>
@@ -25,15 +25,14 @@
 <nav>
   <a href="/">Home</a>
   <a href="/resume.html">Résumé</a>
-  <a href="/stocks.html">The STOCKS Application</a>
   <a href="/build.html">How it's Made</a>
 </nav>
 </header>
 <main id="content">
 
-<article id="outline-container-org436a9e7" class="outline-2">
-<h2 id="org436a9e7">How the Sausage Gets Made</h2>
-<div class="outline-text-2" id="text-org436a9e7">
+<article id="outline-container-org32fe72d" class="outline-2">
+<h2 id="org32fe72d">How the Sausage Gets Made</h2>
+<div class="outline-text-2" id="text-org32fe72d">
 <p>
 This portfolio uses Emacs' <code>org-mode</code> as its content authoring system.
 In the future, I might spend more time talking about this,
@@ -52,18 +51,18 @@ In the original org sources,
     though they render identically in HTML<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 </div>
-<section id="outline-container-org405af3a" class="outline-3">
-<h3 id="org405af3a">The scripts</h3>
-<div class="outline-text-3" id="text-org405af3a">
+<section id="outline-container-org2377869" class="outline-3">
+<h3 id="org2377869">The scripts</h3>
+<div class="outline-text-3" id="text-org2377869">
 <p>
 There are two scripts involved in the build process.
 The first, a shell script, handles launching the build script,
     while the second is the Emacs Lisp script that does the actual building.
 </p>
 </div>
-<section id="outline-container-orga71f8ac" class="outline-4">
-<h4 id="orga71f8ac"><code>build.sh</code></h4>
-<div class="outline-text-4" id="text-orga71f8ac">
+<section id="outline-container-org7fec1e3" class="outline-4">
+<h4 id="org7fec1e3"><code>build.sh</code></h4>
+<div class="outline-text-4" id="text-org7fec1e3">
 <p>
 Originally, the shell script simply launched the Lisp script,
     but it didn't take long to realize
@@ -140,17 +139,17 @@ The final script looks like this:
 </div>
 </section>
 
-<section id="outline-container-orgb06cacc" class="outline-4">
-<h4 id="orgb06cacc"><code>publish.el</code></h4>
-<div class="outline-text-4" id="text-orgb06cacc">
+<section id="outline-container-org8f09d3d" class="outline-4">
+<h4 id="org8f09d3d"><code>publish.el</code></h4>
+<div class="outline-text-4" id="text-org8f09d3d">
 <p>
 The publishing script is more involved,
     but almost all of it is configuring the publishing environment.
 </p>
 </div>
-<section id="outline-container-orgda99657" class="outline-5">
-<h5 id="orgda99657">Dependencies</h5>
-<div class="outline-text-5" id="text-orgda99657">
+<section id="outline-container-orgaa3be5e" class="outline-5">
+<h5 id="orgaa3be5e">Dependencies</h5>
+<div class="outline-text-5" id="text-orgaa3be5e">
 <p>
 First, we pull in Emacs' package management and initialize it:
 </p>
@@ -183,9 +182,9 @@ The last initialization step
 </div>
 </section>
 
-<section id="outline-container-org65c06b5" class="outline-5">
-<h5 id="org65c06b5">Configuration</h5>
-<div class="outline-text-5" id="text-org65c06b5">
+<section id="outline-container-org718cf74" class="outline-5">
+<h5 id="org718cf74">Configuration</h5>
+<div class="outline-text-5" id="text-org718cf74">
 <p>
 We need to set a few variables explicitly,
     mostly for including stylesheets
@@ -222,7 +221,6 @@ We declare strings
 <span style="font-style: italic;">&lt;nav&gt;</span>
 <span style="font-style: italic;">  &lt;a href=\"/\"&gt;Home&lt;/a&gt;</span>
 <span style="font-style: italic;">  &lt;a href=\"/resume.html\"&gt;R&#233;sum&#233;&lt;/a&gt;</span>
-<span style="font-style: italic;">  &lt;a href=\"/stocks.html\"&gt;The STOCKS Application&lt;/a&gt;</span>
 <span style="font-style: italic;">  &lt;a href=\"/build.html\"&gt;How it's Made&lt;/a&gt;</span>
 <span style="font-style: italic;">&lt;/nav&gt;"</span>
  footer (concat <span style="font-style: italic;">"&lt;p&gt;&amp;copy;&amp;thinsp;2021&amp;ndash;"</span>
