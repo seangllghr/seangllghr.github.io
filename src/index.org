@@ -23,3 +23,20 @@ You can find the whole project codebase,
     written in Typescript, HTML, and Sass,
     [[https://github.com/seangllghr/portfolio-stocksapp][here on GitHub]],
     and you can read more about my development process [[file:stocks.org][here]].
+** InventoryApp
+#+name: inventory-overview
+#+attr_latex: :height 4in
+#+attr_html: :style max-width: 393px;
+[[./media/inventory_overview_dark.png]]
+
+InventoryApp is an Android application written in Kotlin.
+It's raw, rough, and unpolished,
+    but it's a functional prototype of a complete application,
+    and it was written in just two weeks—with
+    no prior exposure to Kotlin
+    and less than six weeks' total exposure to Android programming.
+The project was one of the most intense experiences of my educational journey,
+    and there is no stronger example
+    of my ability to rapidly adapt to new platforms and technologies.
+The full project codebase is [[https://github.com/seangllghr/portfolio-inventoryapp][preserved on GitHub]],
+    and more screenshots and development details are available [[file:posts/inventoryapp.org][here]].
