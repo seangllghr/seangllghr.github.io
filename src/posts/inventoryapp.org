@@ -1,0 +1,86 @@
+#+TITLE: Inventoryapp
+
+* ClientCompany, Inc.'s InventoryApp
+If I had to describe my software development journey in a single witticism,
+    “learning new techniques and technologies in uncomfortably short time frames,”
+    would do the trick nicely.
+Nowhere was this more true than during a course I took on mobile development.
+The course itself was short enough from the outset—unlike most colleges,
+    SNHU's online program consisted of a relentless series of 8-week terms,
+    48 weeks per year—but I managed to compress this timeline even further.
+
+The task was fairly straightforward:
+    build an inventory tracking app for Android
+    with rudimentary user login functionality
+    and a simple grid-based inventory management interface.
+While this was my first exposure to Android development,
+    the coursework and textbook were written with Java in mind;
+    I'd written a fair amount of Java in previous courses,
+    and I assumed I'd take the path of least resistance
+    and write this app in Java, as well.
+Once I started development on the actual application logic, however,
+    it became abundantly clear that Java was not the path of least resistance.
+In the time since the course material had been written,
+    Android development had taken a hard turn towards Kotlin,
+    a language with sophisticated features
+    for handling the complexities of modern application development.
+I soldiered on for a week or two,
+    convinced that I could make things work,
+    but progress was slow,
+    and the promise of Kotlin lurked just out of reach,
+    sequestered behind the gate of learning an entirely new language.
+
+#+name: login
+#+attr_latex: :height 4in
+#+attr_html: :style max-width: 393px;
+#+caption: The application's user login screen. Simple, but functional.
+[[../media/login_dark.png]]
+
+The straw that finally broke my back was asynchronous programming;
+    I'd used it in Python for a previous project,
+    and I knew it was the best way to approach a particular task,
+    but Java's approach to the technique—at least at the time—was arcane,
+    built out in third-party libraries
+    that would introduce a whole new layer of unnecessary complexity.
+In a moment of desperation,
+    I pulled up the Kotlin language documentation,
+    and there it was.
+Asynchronous programming was built-in,
+    a fundamental paradigm around which the language had planned from the start.
+That was the solution, then!
+I just had to learn this new language
+    and use it to write an entire application...
+In two weeks.
+
+#+name: add-user
+#+attr_latex: :height 4in
+#+attr_html: :style max-width: 393px;
+#+caption: Trying to login with a nonexistent user brings up a prompt to add a user.
+#+caption: This form extends the login form to accomplish that task.
+[[../media/add_user_form_dark.png]]
+
+It seemed like an impossible task,
+    but I knew I'd be a better developer for it,
+    so I hunkered down,
+    put my nose to the grindstone,
+    and wrote InventoryApp,
+    [[https://github.com/seangllghr/portfolio-inventoryapp][preserved here]] in exactly[fn::
+    Well, not /exactly/;
+    I updated the project to gradle 7.1.2
+    when I went back and built it to get screenshots.
+    However, the actual application code is unchanged.] the state it was in
+    at the end of that two-week sprint.
+It's not cleverly named,
+    and it's not going to win any awards for visual design,
+    but it's a perfectly viable prototype
+    that stands as a testament to my ability to hit the ground running.
+That may not be the only skill a developer needs,
+    but it might be the hardest to acquire,
+    and it's one I've gotten a lot of opportunities to practice.
+
+#+name: inventory-overview
+#+attr_latex: :height 4in
+#+attr_html: :style max-width: 393px;
+#+caption: Database connectivity didn't quite make the final app,
+#+caption: but the app is otherwise functional.
+[[../media/inventory_overview_dark.png]]
