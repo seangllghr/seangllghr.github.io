@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-04-05 Tue 20:43 -->
+<!-- 2022-04-14 Thu 18:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reaching Out to the Market</title>
@@ -30,9 +30,9 @@
 </header>
 <main id="content">
 
-<section id="outline-container-orga87a7b3" class="outline-2">
-<h2 id="orga87a7b3">Reaching Out to the Market</h2>
-<div class="outline-text-2" id="text-orga87a7b3">
+<section id="outline-container-orgfe274c1" class="outline-2">
+<h2 id="orgfe274c1">Reaching Out to the Market</h2>
+<div class="outline-text-2" id="text-orgfe274c1">
 <p>
 With the initial reimplementation of the core server application completed,
     development on meaningful expansions
@@ -56,9 +56,9 @@ In retrospect,
     as development progressed through the final two phases of the project.
 </p>
 </div>
-<div id="outline-container-org4b6d99d" class="outline-3">
-<h3 id="org4b6d99d">Interfacing with Reality</h3>
-<div class="outline-text-3" id="text-org4b6d99d">
+<div id="outline-container-org8314a2f" class="outline-3">
+<h3 id="org8314a2f">Interfacing with Reality</h3>
+<div class="outline-text-3" id="text-org8314a2f">
 <p>
 Stock market data changes at a blistering pace,
     with some APIs offering real-time trade data
@@ -101,9 +101,9 @@ Examining the API documentation
 </p>
 </div>
 </div>
-<div id="outline-container-org0e0e33b" class="outline-3">
-<h3 id="org0e0e33b">Database Problems, Data Structures Solutions</h3>
-<div class="outline-text-3" id="text-org0e0e33b">
+<div id="outline-container-orgff207d1" class="outline-3">
+<h3 id="orgff207d1">Database Problems, Data Structures Solutions</h3>
+<div class="outline-text-3" id="text-orgff207d1">
 <p>
 Despite the fact that the <code>market-sync</code> service
     began its life as a database-focused enhancement,
@@ -117,7 +117,7 @@ The first step was to atomize update operations;
     within a narrow, predefined set.
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>The <code>UpdateObject</code> and its related <code>UpdateType</code> <code>enum</code>.</label><pre class="src src-typescript" id="org98ab352">enum UpdateType {
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>The <code>UpdateObject</code> and its related <code>UpdateType</code> <code>enum</code>.</label><pre class="src src-typescript" id="org15c7465">enum UpdateType {
   OVERVIEW = 1,
   TIME_SERIES,
   DEFER,
@@ -181,9 +181,9 @@ Ultimately, the ideal solution was to examine the timestamp of each stock
 </p>
 </div>
 </div>
-<div id="outline-container-org13d95e3" class="outline-3">
-<h3 id="org13d95e3">A Strong, Flexible Skeleton</h3>
-<div class="outline-text-3" id="text-org13d95e3">
+<div id="outline-container-orga9bce61" class="outline-3">
+<h3 id="orga9bce61">A Strong, Flexible Skeleton</h3>
+<div class="outline-text-3" id="text-orga9bce61">
 <p>
 With the completion of the market sync service,
     development of the STOCKS application stood poised to progress
