@@ -22,7 +22,7 @@ teams of 5--50 people
 :END:
 ** Bachelor of Science, Computer Science
 - Focus :: Concentration in Software Engineering
-- Institution :: Southern New Hampshire University, Manchester, NH. April 2022 (Awaiting Conferral)
+- Institution :: Southern New Hampshire University, Manchester, NH. April 2022
 ** Associates of Applied Arts and Sciences, Adventure Sports Leadership and Management
 - Focus :: Dual Concentration in Snowsports Instruction and Challenge Course Facilitation & Management\\
 - Institution :: State University of New York Adirondack, Queensbury, NY. 2012
