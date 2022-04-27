@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-04-27 Wed 20:25 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WetSpec Weather Station</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Sean Gallagher">
+<link
+    href="https://cdn.simplecss.org/simple.min.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<link
+    href="/styles/styles.css"
+    rel="stylesheet"
+    type="text/css"
+/>
+<script src="https://kit.fontawesome.com/5eb8d43980.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header id="header" class="status">
+<h1>Sean Gallagher</h1>
+<nav>
+  <a href="/">Home</a>
+  <a href="/resume.html">Résumé</a>
+  <a href="/build.html">How it's Made</a>
+</nav>
+</header>
+<main id="content">
+
+<section id="outline-container-org98d21d1" class="outline-2">
+<h2 id="org98d21d1">The SysTech WetSpec Weather Station</h2>
+<div class="outline-text-2" id="text-org98d21d1">
+
+<figure id="org472e2b1">
+<img src="../media/running.png" alt="running.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>The WetSpec prototype unit, a ragged-looking little weather-watcher with a heart of gold. Or snakes, I guess, depending on your perspective.</figcaption>
+</figure>
+
+<p>
+This might have been one of my favorite projects,
+    though I'll concede the name is not one of my finer marketing choices.
+We were tasked with developing the software
+    to drive a prototype weather monitoring system<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+While the components and libraries were off-the-shelf,
+    the project makes heavy use of modern techniques,
+    including Python's <code>asyncio</code> library for asynchronous programming.
+It monitors and records temperature and relative humidity during daylight hours,
+    updating at a user-defined interval,
+    and displays the current time, last reading, and dashboard server status
+    to the included LCD screen.
+The screen's backlight also changes color
+    to indicate current conditions at a glance,
+    and the LED bar on the left gives a rough temperature indication.
+</p>
+
+
+<figure id="org0af3d54">
+<img src="../media/dashboard.png" alt="dashboard.png">
+
+<figcaption><span class="figure-number">Figure 2: </span>The WetSpec web dashboard.</figcaption>
+</figure>
+
+<p>
+The application additionally includes a web dashboard,
+    which provides rudimentary administrative facilities
+    and allows the user to visualize trends in the collected weather data.
+The dashboard front end runs on a simple Express back end server,
+    and is served from the Raspberry Pi device itself.
+Charting functionality uses Canvas.js,
+    with custom logic for inserting chart breaks
+    to compress large gaps in the dataset,
+    such as those that occur when the system is in standby at night.
+</p>
+
+<figure>
+  <div style="padding:56.25% 0 0 0;position:relative;">
+    <iframe
+      src="https://player.vimeo.com/video/700991691?h=a0420dfc58&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      style="position:absolute;top:0;left:0;width:100%;height:100%;"
+      title="SysTech WetSpec Demo"
+    ></iframe>
+  </div>
+  <figcaption>
+  <span class="figure-number">Figure 3:</span>
+  The WetSpec system in action,
+    complete with melodramatic music.
+  </figcaption>
+</figure>
+<script src="https://player.vimeo.com/api/player.js"></script>
+</div>
+</section>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">I also had to do a little "design and assembly",
+    in that I had to pick components,
+    plug in wires,
+    and strap everything down
+    so that the device could survive eight weeks with cats.
+    However, there was no custom design or fabrication work,
+    so it hardly seems fair to call it hardware engineering.</div></div>
+
+
+</div>
+</div></main>
+<footer id="footer" class="status">
+<p>&copy;&thinsp;2021&ndash;2022 Sean Gallagher<br><a href="mailto:seangllghr@gmail.com">seangllghr@gmail.com</a></p>
+</footer>
+</body>
+</html>

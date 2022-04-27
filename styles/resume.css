@@ -1,5 +1,9 @@
 /*** Resume styles ***/
 
+main {
+    padding-top: 0.5rem;
+}
+
 h2, h3, h4, p, dl, ul {
     margin: 0.25rem 0;
 }
@@ -46,7 +50,7 @@ ul li::marker {
     display: flex;
     flex-direction: column;
     list-style: none;
-    margin: -.75rem 0 .5rem;
+    margin: 0 0 .5rem;
 }
 
 .summary p {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-04-14 Thu 19:41 -->
+<!-- 2022-04-27 Wed 20:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About this Portfolio</title>
@@ -30,9 +30,9 @@
 </header>
 <main id="content">
 
-<article id="outline-container-org88d1fc0" class="outline-2">
-<h2 id="org88d1fc0">How the Sausage Gets Made</h2>
-<div class="outline-text-2" id="text-org88d1fc0">
+<article id="outline-container-org475e0aa" class="outline-2">
+<h2 id="org475e0aa">How the Sausage Gets Made</h2>
+<div class="outline-text-2" id="text-org475e0aa">
 <p>
 This portfolio uses Emacs' <code>org-mode</code> as its content authoring system.
 In the future, I might spend more time talking about this,
@@ -51,18 +51,18 @@ In the original org sources,
     though they render identically in HTML<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 </div>
-<section id="outline-container-orgf493c6e" class="outline-3">
-<h3 id="orgf493c6e">The scripts</h3>
-<div class="outline-text-3" id="text-orgf493c6e">
+<section id="outline-container-orgac5995d" class="outline-3">
+<h3 id="orgac5995d">The scripts</h3>
+<div class="outline-text-3" id="text-orgac5995d">
 <p>
 There are two scripts involved in the build process.
 The first, a shell script, handles launching the build script,
     while the second is the Emacs Lisp script that does the actual building.
 </p>
 </div>
-<section id="outline-container-org8f712e5" class="outline-4">
-<h4 id="org8f712e5"><code>build.sh</code></h4>
-<div class="outline-text-4" id="text-org8f712e5">
+<section id="outline-container-orge27b0b6" class="outline-4">
+<h4 id="orge27b0b6"><code>build.sh</code></h4>
+<div class="outline-text-4" id="text-orge27b0b6">
 <p>
 Originally, the shell script simply launched the Lisp script,
     but it didn't take long to realize
@@ -139,17 +139,17 @@ The final script looks like this:
 </div>
 </section>
 
-<section id="outline-container-orgeccc8ca" class="outline-4">
-<h4 id="orgeccc8ca"><code>publish.el</code></h4>
-<div class="outline-text-4" id="text-orgeccc8ca">
+<section id="outline-container-org341bf82" class="outline-4">
+<h4 id="org341bf82"><code>publish.el</code></h4>
+<div class="outline-text-4" id="text-org341bf82">
 <p>
 The publishing script is more involved,
     but almost all of it is configuring the publishing environment.
 </p>
 </div>
-<section id="outline-container-org435038b" class="outline-5">
-<h5 id="org435038b">Dependencies</h5>
-<div class="outline-text-5" id="text-org435038b">
+<section id="outline-container-orgd0eb1ed" class="outline-5">
+<h5 id="orgd0eb1ed">Dependencies</h5>
+<div class="outline-text-5" id="text-orgd0eb1ed">
 <p>
 First, we pull in Emacs' package management and initialize it:
 </p>
@@ -182,9 +182,9 @@ The last initialization step
 </div>
 </section>
 
-<section id="outline-container-org94ffa31" class="outline-5">
-<h5 id="org94ffa31">Configuration</h5>
-<div class="outline-text-5" id="text-org94ffa31">
+<section id="outline-container-orgd9fa0d2" class="outline-5">
+<h5 id="orgd9fa0d2">Configuration</h5>
+<div class="outline-text-5" id="text-orgd9fa0d2">
 <p>
 We need to set a few variables explicitly,
     mostly for including stylesheets
