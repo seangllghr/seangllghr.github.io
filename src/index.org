@@ -24,7 +24,22 @@ You can find the whole project codebase,
     written in Typescript, HTML, and Sass,
     [[https://github.com/seangllghr/portfolio-stocksapp][here on GitHub]],
     and you can read more about my development process [[file:stocks.org][here]].
-** InventoryApp
+** SysTech WetSpec
+#+name: img:wetspec-dash
+#+attr_latex: :width \textwidth
+[[./media/dashboard.png]]
+
+WetSpec is an embedded Python application and web dashboard
+    written to drive an IoT weather station
+    built on a Raspberry Pi 3 and Dexter Industries' GrovePi IoT hardware kit.
+The project makes heavy use of Python's ~asyncio~ library,
+    and the dashboard runs a Canvas.js-powered data visualization suite
+    on an Express.js web application backend.
+The project codebase is [[https://github.com/seangllghr/portfolio-wetspec][on GitHub]],
+    and additional screenshots and a somewhat melodramatic demo video
+    can be seen on the [[file:posts/weatherstation.org][project page]].
+
+**  InventoryApp
 #+name: inventory-overview
 #+attr_latex: :height 4in
 #+attr_html: :style max-width: 393px;
