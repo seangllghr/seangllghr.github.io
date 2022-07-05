@@ -69,7 +69,7 @@ Background and coursework in full-stack JavaScript and Python development,
 - Nest.js
 - JSON
 - Adobe Illustrator
-- Adobe InDesign
+- Adobe Photoshop
 ** Operating Systems
 :PROPERTIES:
 :html_container: section
