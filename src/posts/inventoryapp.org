@@ -1,6 +1,9 @@
 #+TITLE: Inventoryapp
 
 * ClientCompany, Inc.'s InventoryApp
+:properties:
+:html_container: article
+:end:
 If I had to describe my software development journey in a single witticism,
     “learning new techniques and technologies in uncomfortably short time frames,”
     would do the trick nicely.

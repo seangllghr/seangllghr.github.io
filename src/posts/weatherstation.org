@@ -1,6 +1,9 @@
 #+TITLE: WetSpec Weather Station
 
 *  The SysTech WetSpec Weather Station
+:properties:
+:html_container: article
+:end:
 #+name: img:system-running
 #+attr_latex: :width \textwidth
 #+caption: The WetSpec prototype unit,

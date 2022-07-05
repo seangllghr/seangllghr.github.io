@@ -1,6 +1,9 @@
 #+TITLE: Reaching Out to the Market
 
 * Reaching Out to the Market
+:properties:
+:html_container: article
+:end:
 With the initial reimplementation of the core server application completed,
     development on meaningful expansions
     to the application's capabilities could begin.
@@ -22,6 +25,9 @@ In retrospect,
     quickly came to define the application as a whole
     as development progressed through the final two phases of the project.
 ** Interfacing with Reality
+:properties:
+:html_container: section
+:end:
 Stock market data changes at a blistering pace,
     with some APIs offering real-time trade data
     that updates several times per second.
@@ -59,6 +65,9 @@ Examining the API documentation
     the ~market-sync~ service would need to aggregate data
     from two separate API calls.
 ** Database Problems, Data Structures Solutions
+:properties:
+:html_container: section
+:end:
 Despite the fact that the ~market-sync~ service
     began its life as a database-focused enhancement,
     managing the constraints imposed by the third-party provider
@@ -131,6 +140,9 @@ However, this was also sub-optimal,
 Ultimately, the ideal solution was to examine the timestamp of each stock
     and update only if the stock had not updated since the last market close.
 ** A Strong, Flexible Skeleton
+:properties:
+:html_container: section
+:end:
 With the completion of the market sync service,
     development of the STOCKS application stood poised to progress
     into the third and final phase of development,

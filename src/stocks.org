@@ -1,6 +1,9 @@
 #+TITLE: Building the STOCKS Application
 
 * Building the STOCKS Application
+:properties:
+:html_container: article
+:end:
 The process of building the STOCKS application began in 2020,
     with the development of the original server application.
 This application,
@@ -15,20 +18,32 @@ The video code review and narratives below
     discuss the state of the original project
     and the development process that led to the STOCKS application.
 ** [[file:posts/code-review.org][Video Code Review]]
+:properties:
+:html_container: section
+:end:
 The Video Code Review focuses on the state of the original Javascript server,
     as it existed at the end of August, 2020.
 ** [[file:posts/stocks-server.org][Rewriting the STOCKS Server]]
+:properties:
+:html_container: section
+:end:
 The first step in building the new STOCKS application
     was to tackle reimplementing the server in Typescript.
 This meant wholesale embrace of new techniques and tools
     and a more nuanced approach to data.
 ** [[file:posts/market-sync.org][Reaching Out to the Market]]
+:properties:
+:html_container: section
+:end:
 With the core API and data model complete,
     focus shifted outside the application for the first time.
 Real-world markets shift and change by the minute,
     but developing a workable application within the limits of a student budget
     required compromises and creativity.
 ** [[file:posts/webstocks.org][The Façade]]
+:properties:
+:html_container: section
+:end:
 For better or worse,
     every architect recognizes the disproportionate amount of time and energy
     that gets devoted to a building's principal façade,

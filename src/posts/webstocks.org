@@ -1,6 +1,9 @@
 #+TITLE: The Façade
 
 * The Façade
+:properties:
+:html_container: article
+:end:
 It seems fitting to begin this discussion of software architecture
     with an anecdote about the practice that gives it its name.
 In Architecture,
@@ -31,6 +34,9 @@ Its component-based architecture bore a striking resemblance
 Its importance to the utility and value of the project as a whole,
     however, cannot be understated.
 ** An Elegant Framework
+:properties:
+:html_container: section
+:end:
 After an early conceptual development process
     that resembled my original design experiences enough
     to cause flashbacks to long-winded discussions about green thumbtacks[fn::
@@ -89,6 +95,9 @@ The result is a lean, performant application,
     despite the additional complexity introduced
     by the relatively heavy Angular framework.
 ** For a More Civilized Application
+:properties:
+:html_container: section
+:end:
 While the WebSTOCKS application that emerged from this project is,
     by no means, the sort of titan Angular was meant to tame,
     it is a salient example of the power of the framework.

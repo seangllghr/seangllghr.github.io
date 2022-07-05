@@ -1,6 +1,9 @@
 #+TITLE: Rewriting the STOCKS Server
 
 * Rewriting the STOCKS Server
+:properties:
+:html_container: article
+:end:
 The original STOCKS server — a
     fairly pedestrian Node.js/Express/MongoDB application
     presenting a simplistic REST API — was
@@ -24,6 +27,9 @@ Furthermore,
     to ease developer burden
     and further improve performance, maintainability, and capability.
 ** Monorepos and Frameworks and Modules (Oh my...)
+:properties:
+:html_container: section
+:end:
 This last point was especially salient in this early stage of the project.
 Despite my vantage point at the very beginning of my career,
     I understood how rare it was to have the chance
@@ -96,6 +102,9 @@ It was the picture of a modern, productive work environment,
     and it led me directly to the solution to the other,
     far more significant goal of this enhancement.
 ** Defining the Data Model
+:properties:
+:html_container: section
+:end:
 Once I got into the meat of developing the new STOCKS application,
     it quickly became clear
     that Nest.js wasn't just going to make it easier to define a data model,
@@ -132,6 +141,9 @@ In fact, the data model interface experienced only two major changes
     only one of which broke previously-implemented functionality.
 
 ** Not Groundbreaking, but Ground Broken
+:properties:
+:html_container: section
+:end:
 The decisions I made during this first phase of development
     had lasting ramifications for the project.
 I implemented a modular, extensible RESTful application server

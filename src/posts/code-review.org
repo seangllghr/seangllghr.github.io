@@ -2,6 +2,9 @@
 # I'm a little aggressive with SemBr in this file because it's a script for an
 # actual video recording. The breaks make it easier for me to read—and breathe.
 * Before: The Existing STOCKS Application
+:properties:
+:html_container: article
+:end:
 #+begin_export html
 <div style="padding:56.25% 0 0 0;position:relative;">
     <iframe
@@ -44,12 +47,18 @@ Along with establishing the foundation
     this video will also touch
     on the enhancements that were originally proposed.
 ** Software Engineering and Design
+:properties:
+:html_container: section
+:end:
 The first category was Software Engineering and Design,
     and it was far and away the most grandiose,
     both in terms of the scope of the existing codebase
     covered by the category
     and the scale of the ambitious enhancement I proposed.
 *** Existing Functionality
+:properties:
+:html_container: section
+:end:
 The existing code implements an architectural pattern
     common to Node.js/@@latex:\allowbreak @@Express applications,
     which divides the application
@@ -77,6 +86,9 @@ This client works more than well enough for testing — so
 Therefore, the client experience became the focus
     for the Software Design and Engineering milestone.
 *** Code Analysis
+:properties:
+:html_container: section
+:end:
 The existing codebase is actually
     something I'm rather proud of.
 It's well documented,
@@ -91,6 +103,9 @@ It does have a fair amount of legacy code,
 Notably, whole files, like this ~basicApp.js~ file,
     are entirely irrelevant to the final API.
 *** Enhancement
+:properties:
+:html_container: section
+:end:
 The proposed enhancement for this category was
     an Angular single-page web application,
     which would replicate
@@ -109,9 +124,15 @@ The architecture,
     and similar to other front-end Javascript frameworks,
     like React and Vue.
 ** Data Structures and Algorithms
+:properties:
+:html_container: section
+:end:
 Our second category pertained
     to Data Structures and Algorithms.
 *** Existing Functionality
+:properties:
+:html_container: section
+:end:
 The existing application is relatively weak in this category.
 MongoDB handles much of the data processing
     within the database server, itself,
@@ -122,6 +143,9 @@ As a result,
     and it enforces only basic conditions
     on the data structures it receives from the driver.
 *** Code Analysis
+:properties:
+:html_container: section
+:end:
 The only time the code really addresses this category
     are in the few places where it implements checks
     to ensure data integrity.
@@ -133,6 +157,9 @@ Everything else is open to interpretation,
     which constitutes a substantial risk
     to system stability and, probably, security.
 *** Enhancement
+:properties:
+:html_container: section
+:end:
 The enhancement in the
     Data Structures and Algorithms category
     aims to address this shortcoming
@@ -145,7 +172,13 @@ Additionally,
     to ensure that inconsistent data
     is not stored in the database.
 ** Databases
+:properties:
+:html_container: section
+:end:
 *** Existing Functionality
+:properties:
+:html_container: section
+:end:
 The existing database code essentially implements wrappers
     around MongoDB's Javascript driver
     to abstract some of the complexity
@@ -153,6 +186,9 @@ The existing database code essentially implements wrappers
 The existing system drew data from a static JSON file,
     and only changed based on user manipulations.
 *** Code Analysis
+:properties:
+:html_container: section
+:end:
 The database code is pretty good, overall.
 In all but one case,
     this ~dataAggregate~ function here,
@@ -171,6 +207,9 @@ As the functionality it provides is fairly close
     it had less of a chance to accumulate legacy cruft
     over the course of its relatively brief development.
 *** Enhancement
+:properties:
+:html_container: section
+:end:
 The database enhancement was to be a REST client service
     that reached out to a third-party market data provider
     to fetch real-world stock market data.
@@ -183,6 +222,9 @@ Since the various third-party providers I researched
     consistent with the data model
     defined in the Data Structures enhancement.
 ** Conclusion
+:properties:
+:html_container: section
+:end:
 Ultimately,
     the original proposal boiled down
     to a near-complete rewrite of the STOCKS application.

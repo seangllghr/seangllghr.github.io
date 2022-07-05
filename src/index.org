@@ -1,6 +1,9 @@
 #+title: Sean Gallagher — Portfolio
 
 * Hi! I'm Sean
+:properties:
+:html_container: article
+:end:
 #+begin_export latex
 The online version of this portfolio is available at
 \href{https://seangllghr.github.io}{https://seangllghr.github.io}
@@ -13,6 +16,9 @@ While there are a number of projects I'm still polishing for inclusion,
     I think the content here provides a broad-stroke overview of my best work,
     and I'd love it if you'd take a look around.
 ** The STOCKS Application
+:properties:
+:html_container: section
+:end:
 #+name: img:webstocks
 #+attr_latex: :width \textwidth
 [[./media/webstocks.png]]
@@ -25,6 +31,9 @@ You can find the whole project codebase,
     [[https://github.com/seangllghr/portfolio-stocksapp][here on GitHub]],
     and you can read more about my development process [[file:stocks.org][here]].
 ** SysTech WetSpec
+:properties:
+:html_container: section
+:end:
 #+name: img:wetspec-dash
 #+attr_latex: :width \textwidth
 [[./media/dashboard.png]]
@@ -40,6 +49,9 @@ The project codebase is [[https://github.com/seangllghr/portfolio-wetspec][on Gi
     can be seen on the [[file:posts/weatherstation.org][project page]].
 
 **  InventoryApp
+:properties:
+:html_container: section
+:end:
 #+name: inventory-overview
 #+attr_latex: :height 4in
 #+attr_html: :style max-width: min(393px, 100%);
