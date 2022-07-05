@@ -19,8 +19,28 @@ body::-webkit-scrollbar-thumb {
   border: 0.1875rem solid var(--bg);
 }
 
+section {
+  border-bottom: none;
+  margin: 0;
+}
+
+section:last-of-type {
+  padding-bottom: 0;
+}
+
+section h2:first-child,
+section h3:first-child,
+section h4:first-child,
+section h5:first-child {
+  margin: 0;
+}
+
 code, kbd, pre, pre span, samp {
     font-size: calc(var(--base-font-size) * 0.95);
+}
+
+figure {
+  margin-top: 1rem;
 }
 
 body header {
