@@ -24,9 +24,19 @@ Background and coursework in full-stack JavaScript and Python development,
 :custom_id: education
 :END:
 ** Bachelor of Science, Computer Science
+:PROPERTIES:
+:html_container: section
+:html_container_class: degree
+:custom_id: degree-bachelors
+:END:
 - Focus :: Concentration in Software Engineering
 - Institution :: Southern New Hampshire University, Manchester, NH. April 2022
 ** Associates of Applied Arts and Sciences, Adventure Sports Leadership and Management
+:PROPERTIES:
+:html_container: section
+:html_container_class: degree
+:custom_id: degree-associates
+:END:
 - Focus :: Dual Concentration in Snowsports Instruction and Challenge Course Facilitation & Management\\
 - Institution :: State University of New York Adirondack, Queensbury, NY. 2012
 * Technical Skills
@@ -35,6 +45,11 @@ Background and coursework in full-stack JavaScript and Python development,
 :html_container_class: skills
 :END:
 ** Languages:
+:PROPERTIES:
+:html_container: section
+:html_container_class: skill-category
+:custom_id: computer-languages
+:END:
 - Javascript/Typescript
 - HTML
 - CSS
@@ -44,6 +59,11 @@ Background and coursework in full-stack JavaScript and Python development,
 - Bash
 - @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
 ** Tools and Technologies
+:PROPERTIES:
+:html_container: section
+:html_container_class: skill-category
+:custom_id: tools-technologies
+:END:
 - Node.js
 - Angular
 - Nest.js
@@ -51,6 +71,11 @@ Background and coursework in full-stack JavaScript and Python development,
 - Adobe Illustrator
 - Adobe InDesign
 ** Operating Systems
+:PROPERTIES:
+:html_container: section
+:html_container_class: skill-category
+:custom_id: systems
+:END:
 - Linux
 - Windows
 * Experience
@@ -60,6 +85,7 @@ Background and coursework in full-stack JavaScript and Python development,
 :END:
 ** Program Director
 :PROPERTIES:
+:html_container: section
 :html_container_class: position
 :END:
 - Period :: Summer Seasonal, 2017--2019
@@ -84,6 +110,7 @@ Background and coursework in full-stack JavaScript and Python development,
     MacOS systems.
 ** Snow Pro
 :PROPERTIES:
+:html_container: section
 :html_container_class: position
 :END:
 - Period :: Winter Seasonal, 2013--19
@@ -96,6 +123,7 @@ Background and coursework in full-stack JavaScript and Python development,
     dining, and transportation services
 ** Aquatics Director
 :PROPERTIES:
+:html_container: section
 :html_container_class: position
 :END:
 - Period :: Summer Seasonal 2016
@@ -107,6 +135,7 @@ Background and coursework in full-stack JavaScript and Python development,
 #   Badge instruction
 ** Aquatics Director
 :PROPERTIES:
+:html_container: section
 :html_container_class: position
 :END:
 - Period :: Summer Seasonal 2013--2015
@@ -118,6 +147,7 @@ Background and coursework in full-stack JavaScript and Python development,
 :END:
 ** Committee Member
 :PROPERTIES:
+:html_container: section
 :html_container_class: position
 :END:
 - Period :: 2013--Present
@@ -131,6 +161,7 @@ Background and coursework in full-stack JavaScript and Python development,
     council camps
 ** Aquatics Section Faculty
 :PROPERTIES:
+:html_container: section
 :html_container_class: position
 :END:
 - Period :: June 2015--June 2019
