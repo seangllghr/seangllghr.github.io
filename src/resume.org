@@ -11,9 +11,10 @@
 - @@html: <span class="fas fa-folder"></span>@@ [[https://seangllghr.github.io][seangllghr.github.io]]
 # - @@html: <span class="fas fa-map-marker-alt"></span>@@ 15 Swatling Rd. Apt. 1, Latham, NY 12110
 
-Dedicated, self-motivated developer
-    with a background in open-source software,
-    full-stack web technologies,
+Dedicated, self-motivated software engineering graduate
+    seeking entry-level developer position.
+Background and coursework in full-stack JavaScript and Python development,
+    open-source software,
     and visual design.
 11 years experience in customer-facing and instructional positions
     with 7 years experience leading teams of 5--50 people
