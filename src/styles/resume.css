@@ -4,6 +4,11 @@ main {
     padding-top: 0.5rem;
 }
 
+section {
+    border: none;
+    padding: 0;
+}
+
 h2, h3, h4, p, dl, ul {
     margin: 0.25rem 0;
 }
