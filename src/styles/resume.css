@@ -9,16 +9,30 @@ section {
     padding: 0;
 }
 
-h2, h3, h4, p, dl, ul {
+h3, h4, p, dl, ul {
     margin: 0.25rem 0;
+}
+
+h5 {
+    margin: 0.25rem 0 0.25rem 1rem;
 }
 
 h2 {
     font-size: 1.25rem;
+    margin: 0.5rem 0;
 }
 
 h3, h4 {
     font-size: 1.05rem;
+}
+
+h5 {
+    font-size: 0.95rem;
+    font-weight: normal;
+}
+
+article h2:first-child, section h2:first-child {
+    margin-top: 0.5rem;
 }
 
 p, ul, dl {
@@ -68,17 +82,44 @@ ul li::marker {
     content: none;
 }
 
-.languages dt {
-    display: unset;
+.education h3 i {
+    float: right;
+    font-weight: normal;
 }
 
-.languages dt::after {
-    content: ": "
+.education dl {
+    grid: "degree date"
+          "focus focus"
+          "projects projects"
+          / 3fr 1fr;
 }
 
-.languages dd {
-    margin-inline-start: 1rem;
-    margin-inline-end: 1rem;
+.education dd {
+    font-style: italic;
+}
+
+.education dd:first-of-type {
+    grid-area: date;
+    place-self: end;
+}
+
+.education dd:nth-of-type(2) {
+    font-weight: bold;
+    grid-area: degree;
+}
+
+.education dd:nth-of-type(3) {
+    grid-area: focus;
+}
+
+.education dd:nth-of-type(4) {
+    grid-area: projects;
+    font-size: 0.9rem;
+    font-style: normal;
+}
+
+.duties h4 {
+    display: none;
 }
 
 @media screen and (min-width: 40rem) {
@@ -94,18 +135,13 @@ ul li::marker {
     .skills ul {
         columns: 3;
     }
-
-    .languages dt, .languages dd {
-        display: inline;
-        margin-inline-start: unset;
-    }
 }
 
 @media print {
 
     @page {
         size: letter portrait;
-        margin: 0.375in 0.75in;
+        margin: 0.375in 0.75in 0.25in;
     }
 
     :root {
@@ -158,10 +194,5 @@ ul li::marker {
 
     .position {
         break-inside: avoid;
-    }
-
-    .languages dt, .languages dd {
-        display: inline;
-        margin-inline-start: unset;
     }
 }

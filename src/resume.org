@@ -1,4 +1,4 @@
-#+title: Sean Gallagher — Résumé
+#+title: Sean Gallagher—Résumé
 #+html_head_extra: <link rel="stylesheet" href="/styles/resume.css" type="text/css" />
 * Summary
 :PROPERTIES:
@@ -6,39 +6,55 @@
 :custom_id: summary
 :END:
 - @@html: <span class="fas fa-phone"></span>@@ @@html:<a href="tel:+15183626816">518.362.6816</a>@@
-- @@html: <span class="fas fa-envelope-open"></span>@@ [[mailto:seangllghr@gmail.com][seangllghr@gmail.com]]
+- @@html: <span class="fas fa-envelope-open"></span>@@ [[mailto:sean@gallaghersw.dev][sean@gallaghersw.dev]]
 - @@html: <span class="fab fa-github"></span>@@ [[https://github.com/seangllghr][seangllghr]]
-- @@html: <span class="fas fa-folder"></span>@@ [[https://seangllghr.github.io][seangllghr.github.io]]
+- @@html: <span class="fas fa-folder"></span>@@ [[https://gallaghersw.dev][gallaghersw.dev]]
 # - @@html: <span class="fas fa-map-marker-alt"></span>@@ 15 Swatling Rd. Apt. 1, Latham, NY 12110
 
 Dedicated, self-motivated software engineering graduate
-    seeking entry-level developer position.
+    seeking entry-level position.
 Background and coursework in full-stack JavaScript and Python development,
-    open-source software,
-    and visual design.
+    open-source software and Linux automation,
+    and visual and architectural design.
 11 years experience in customer-facing and instructional positions
-    with 7 years experience leading teams of 5--50 people
+    with 7 years leading teams of 5--50 people
 * Education
 :PROPERTIES:
 :html_container_class: education
 :custom_id: education
 :END:
-** Bachelor of Science, Computer Science
+** Southern New Hampshire University /Manchester, NH/
 :PROPERTIES:
 :html_container: section
 :html_container_class: degree
 :custom_id: degree-bachelors
 :END:
+- Date :: Graduated April 2022
+- Degree :: Bachelor of Science, Computer Science
 - Focus :: Concentration in Software Engineering
-- Institution :: Southern New Hampshire University, Manchester, NH. April 2022
-** Associates of Applied Arts and Sciences, Adventure Sports Leadership and Management
+- Projects :: Developed a full-stack application in TypeScript, Angular and Nest.js for capstone project;
+  coursework included object-oriented analysis and design,
+  3d graphics, and application development in Python, Java, Kotlin, and C++.
+** State University of New York Adirondack /Queensbury, NY/
 :PROPERTIES:
 :html_container: section
 :html_container_class: degree
 :custom_id: degree-associates
 :END:
-- Focus :: Dual Concentration in Snowsports Instruction and Challenge Course Facilitation & Management\\
-- Institution :: State University of New York Adirondack, Queensbury, NY. 2012
+- Date :: Graduated December 2012
+- Degree :: Associates of Applied Arts and Sciences, Adventure Sports Leadership and Management
+- Focus :: Dual Concentration in Snowsports Instruction and Challenge Course Facilitation & Management
+** New York Institute of Technology /Old Westbury, NY/
+:PROPERTIES:
+:html_container: section
+:html_container_class:  degree
+:custom_id: degree-architecture-incomplete
+:END:
+- Date :: 2008--2010
+- Degree :: Coursework towards Bachelor of Science, Architectural Technology
+- Focus ::
+- Projects :: Completed coursework included Architectural Vizualization,
+  Building Construction, and Design Fundamentals.
 * Technical Skills
 :PROPERTIES:
 :custom_id: skills
@@ -51,13 +67,12 @@ Background and coursework in full-stack JavaScript and Python development,
 :custom_id: computer-languages
 :END:
 - Javascript/Typescript
-- HTML
-- CSS
+- HTML/CSS
 - Python
-- Java
-- C/C++
 - Bash
+- C/C++
 - @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
+# - Java
 ** Tools and Technologies
 :PROPERTIES:
 :html_container: section
@@ -68,8 +83,11 @@ Background and coursework in full-stack JavaScript and Python development,
 - Angular
 - Nest.js
 - JSON
-- Adobe Illustrator
-- Adobe Photoshop
+- Adobe Creative Cloud
+- AutoCAD
+- Autodesk Revit
+- Autodesk Inventor
+- Microsoft Office
 ** Operating Systems
 :PROPERTIES:
 :html_container: section
@@ -87,59 +105,106 @@ Background and coursework in full-stack JavaScript and Python development,
 :PROPERTIES:
 :html_container: section
 :html_container_class: position
+:contact_name: Brian Murray
 :END:
 - Period :: Summer Seasonal, 2017--2019
 - Employer :: Camp Wakpominee, Twin Rivers Council, Boy Scouts of America
-- Summary ::
-  - Led a team of 10 program area directors responsible for a total of more than
-    50 program staff.
-  - Designed forms, schedule handouts, and other hard copy documents
-    related to camp program and activities,
-    using proprietary design tools and open-source alternatives,
-    including HTML/CSS-to-PDF toolchains,
-    Microsoft Office,
-    Adobe Illustrator,
-    and Adobe InDesign.
-  - Automated publication of a daily newsletter, using Node.js to ingest a
-    Markdown/plaintext feature article source and JSON daily schedule to build an
-    HTML file for PDF conversion.
-  - Installed and configured a dedicated Linux server that handled weekly
-    paperwork and provision of common network resources within the camp office.
-  - Handled routine IT configuration and troubleshooting tasks for the camp
-    office's heterogeneous network environment, including Linux, Windows, and
-    MacOS systems.
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+- Led a team of 10 program area directors responsible for a total of more than
+  50 program staff.
+- Designed hard copy documents related to camp program and activities,
+  using HTML/CSS-to-PDF toolchains, the Adobe suite, and Office, among others.
+- Installed and configured a dedicated Linux server
+  that provided common network resources within the camp office,
+  including network storage and printing for weekly paperwork.
+- Handled routine IT configuration tasks for the camp
+  office's heterogeneous network environment.
+- Automated publication of a daily newsletter, using Node.js to ingest a
+  Markdown/plaintext feature article source and JSON daily schedule to build an
+  HTML file for PDF conversion.
 ** Snow Pro
 :PROPERTIES:
 :html_container: section
 :html_container_class: position
+:contact_name: Alex Kendrick
 :END:
 - Period :: Winter Seasonal, 2013--19
 - Employer :: Ski and Snowboard Schools of Aspen/Snowmass, Aspen Skiing Company
-- Summary ::
-  - Instructed an international clientele of children and adults in downhill
-    skiing skills
-  - Facilitated guest interactions with other Aspen Skiing Company departments and
-    outside service providers, including lesson sales and ticketing, rentals,
-    dining, and transportation services
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+- Instructed an international clientele of children and adults in downhill skiing skills.
+- Facilitated guest interactions with other ASC departments and outside service providers.
 ** Aquatics Director
 :PROPERTIES:
 :html_container: section
 :html_container_class: position
+:contact_name: Brian Murray
 :END:
 - Period :: Summer Seasonal 2016
 - Employer :: Henderson Scout Reservation, Leatherstocking Council, Boy Scouts of America
-- Summary ::
-  - Managed a team of four aquatics instructors responsible for lifeguard coverage and skill instruction
-  - Led weekly off-site canoe trips of 30--50 Scouts
-# - Developed and deployed an intranet portal for distributing materials for Merit
-#   Badge instruction
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+- Managed a team of four aquatics instructors
+  responsible for lifeguard coverage and skill instruction.
+- Led weekly off-site canoe trips of 30--50 Scouts.
+- Developed and deployed an intranet portal for distributing materials for Merit
+  Badge instruction
 ** Aquatics Director
 :PROPERTIES:
 :html_container: section
 :html_container_class: position
+:contact_name: Brian Murray
 :END:
 - Period :: Summer Seasonal 2013--2015
 - Employer :: Camp Wakpominee, Twin Rivers Council, Boy Scouts of America
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+- Managed a team of up to ten aquatics instructors
+  responsible for lifeguard coverage and skill instruction.
+** Ski Instructor
+- Period :: Winter Season, 2012--2013
+- Employer :: Loon Mountain
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+- Instructed an international clientele in downhill skiing and snowboarding skills
+** Multiple Positions
+- Period :: Summer Seasonal 2008--2012
+- Employer :: Rotary Scout Reservation, Twin Rivers Council, Boy Scouts of America
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+**** As Program Director (2012):
+- Led a team of 10 Area Directors responsible for more than 50 staff
+- Developed and led camp-wide summer camp programming for youth, age 11--17
+
+**** As Assistant Aquatics Director (2011):
+- Trained and assisted in directing a team of eight aquatics instructors
+- Taught aquatics supervision, lifesaving, and boating safety skills
+  to adult volunteers
+- All duties expected of aquatics instructors (see below)
+
+**** As Aquatics Instructor (2008--2010):
+- Taught swimming, lifesaving, and boating skills to youth, age 11--17
+- Monitored bather safety and ensured safe facility conditions
+- Provided first response emergent medical care for in-water and dry land incidents
 * Volunteer Experience
 :PROPERTIES:
 :html_container_class: volunteer
@@ -152,13 +217,17 @@ Background and coursework in full-stack JavaScript and Python development,
 :END:
 - Period :: 2013--Present
 - Organization :: Council Aquatics Committee, Twin Rivers Council, Boy Scouts of America
-- Summary ::
-  - Kept and published minutes for regular meetings
-    using @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
-    and Emacs org-mode
-  - Designed, using Adobe Illustrator, a patch recognizing dedication to aquatics programs
-  - Facilitated an annual pre-camp training program for aquatics staff from both
-    council camps
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+- Kept and published minutes for regular meetings
+  using @@html: <span class="latex">L<span>a</span>T<span>e</span>X</span>@@
+  and Emacs org-mode
+- Designed, using Adobe Illustrator, a patch recognizing dedication to aquatics programs
+- Facilitated an annual pre-camp training program for aquatics staff from both
+  council camps
 ** Aquatics Section Faculty
 :PROPERTIES:
 :html_container: section
@@ -166,16 +235,19 @@ Background and coursework in full-stack JavaScript and Python development,
 :END:
 - Period :: June 2015--June 2019
 - Organization :: National Camping School Adirondack Section, Boy Scouts of America
-- Summary ::
-  - Taught water rescue, swimming, and boating skills to aquatics director
-    candidates
-  - Trained candidates in crucial managerial soft skills, including interpersonal
-    interaction, conflict resolution, and effective teaching
+*** Summary
+:PROPERTIES:
+:html_container: section
+:html_container_class: duties
+:END:
+- Taught water rescue, swimming, and boating skills to aquatics director
+  candidates
+- Trained candidates in crucial managerial soft skills, including interpersonal
+  interaction, conflict resolution, and effective teaching
 * Languages Spoken
 :PROPERTIES:
 :html_container_class: languages
 :custom_id: languages
 :END:
-- English :: Native Speaker
-- Spanish :: Fluent
+Fluent in English (native speaker) and Spanish.
 # - Portuguese :: Basic
