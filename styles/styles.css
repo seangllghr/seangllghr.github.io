@@ -1,5 +1,27 @@
+@font-face {
+  font-family: 'Libertinus Sans';
+  src: url('fonts/LibertinusSans-Regular.woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Libertinus Sans';
+  src: url('fonts/LibertinusSans-Bold.woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Libertinus Sans';
+  src: url('fonts/LibertinusSans-Italic.woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
 :root {
     --base-font-size: 1rem;
+    --sans-font: 'Libertinus Sans', Verdanna, Geneva, Tahoma, sans-serif;
     --header-scale: 1.15;
     --line-height: 1.618;
     scrollbar-color: var(--border) var(--bg);
@@ -26,13 +48,6 @@ section {
 
 section:last-of-type {
   padding-bottom: 0;
-}
-
-section h2:first-child,
-section h3:first-child,
-section h4:first-child,
-section h5:first-child {
-  margin: 0;
 }
 
 code, kbd, pre, pre span, samp {
