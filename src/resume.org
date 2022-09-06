@@ -53,7 +53,7 @@ Background and coursework in full-stack JavaScript and Python development,
 - Date :: 2008--2010
 - Degree :: Coursework towards Bachelor of Science, Architectural Technology
 - Focus ::
-- Projects :: Completed coursework included Architectural Vizualization,
+- Projects :: Completed coursework included Architectural Visualization,
   Building Construction, and Design Fundamentals.
 * Technical Skills
 :PROPERTIES:
@@ -79,9 +79,9 @@ Background and coursework in full-stack JavaScript and Python development,
 :html_container_class: skill-category
 :custom_id: tools-technologies
 :END:
-- Node.js
-- Angular
-- Nest.js
+# - Node.js
+# - Angular
+# - Nest.js
 - JSON
 - Adobe Creative Cloud
 - AutoCAD
@@ -123,9 +123,9 @@ Background and coursework in full-stack JavaScript and Python development,
   including network storage and printing for weekly paperwork.
 - Handled routine IT configuration tasks for the camp
   office's heterogeneous network environment.
-- Automated publication of a daily newsletter, using Node.js to ingest a
-  Markdown/plaintext feature article source and JSON daily schedule to build an
-  HTML file for PDF conversion.
+# - Automated publication of a daily newsletter, using Node.js to ingest a
+#   Markdown/plaintext feature article source and JSON daily schedule to build an
+#   HTML file for PDF conversion.
 ** Snow Pro
 :PROPERTIES:
 :html_container: section
@@ -156,9 +156,9 @@ Background and coursework in full-stack JavaScript and Python development,
 :END:
 - Managed a team of four aquatics instructors
   responsible for lifeguard coverage and skill instruction.
-- Led weekly off-site canoe trips of 30--50 Scouts.
-- Developed and deployed an intranet portal for distributing materials for Merit
-  Badge instruction
+# - Led weekly off-site canoe trips of 30--50 Scouts.
+# - Developed and deployed an intranet portal for distributing materials for Merit
+#   Badge instruction
 ** Aquatics Director
 :PROPERTIES:
 :html_container: section
@@ -167,14 +167,14 @@ Background and coursework in full-stack JavaScript and Python development,
 :END:
 - Period :: Summer Seasonal 2013--2015
 - Employer :: Camp Wakpominee, Twin Rivers Council, Boy Scouts of America
-*** Summary
+*** Summary :noexport:
 :PROPERTIES:
 :html_container: section
 :html_container_class: duties
 :END:
 - Managed a team of up to ten aquatics instructors
   responsible for lifeguard coverage and skill instruction.
-** Ski Instructor
+** Ski Instructor :noexport:
 - Period :: Winter Season, 2012--2013
 - Employer :: Loon Mountain
 *** Summary
@@ -183,7 +183,7 @@ Background and coursework in full-stack JavaScript and Python development,
 :html_container_class: duties
 :END:
 - Instructed an international clientele in downhill skiing and snowboarding skills
-** Multiple Positions
+** Multiple Positions :noexport:
 - Period :: Summer Seasonal 2008--2012
 - Employer :: Rotary Scout Reservation, Twin Rivers Council, Boy Scouts of America
 *** Summary
